@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "917143241820",
+    "project_id": "tutorial-firebase-5ec32",
+    "storage_bucket": "tutorial-firebase-5ec32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917143241820:android:a17cabf09979187cb79299",
+        "android_client_info": {
+          "package_name": "com.example.tutorialfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917143241820-2fov2b6nni670k6ac7e0vsnec1fqfmd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKBRWFnzl7ggkWaAy2R3qR0gu21fQYoPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917143241820-2fov2b6nni670k6ac7e0vsnec1fqfmd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
