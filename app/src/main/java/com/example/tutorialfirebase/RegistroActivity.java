@@ -3,7 +3,6 @@ package com.example.tutorialfirebase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,21 +14,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class RegistroActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
-    private EditText edtLUsuario;
-    private EditText edtLContraseña;
+    private EditText edtRUsuario;
+    private EditText edtRContraseña;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_registro);
 
-        edtLUsuario = (EditText) findViewById(R.id.edtLUsuario);
-        edtLContraseña = (EditText) findViewById(R.id.edtLContraseña);
+        edtRUsuario = (EditText) findViewById(R.id.edtRUsuario);
+        edtRContraseña = (EditText) findViewById(R.id.edtRContraseña);
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -37,13 +36,9 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser usuario = firebaseAuth.getCurrentUser();
                 if(usuario != null){
-                    if(!usuario.isEmailVerified()){
-                        Toast.makeText(MainActivity.this, "E-mail no verificado" + usuario.getEmail(), Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(MainActivity.this, "Navegando al activity del chat", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                        startActivity(intent);
-                    }
+                    Toast.makeText(RegistroActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(RegistroActivity.this, "Error al crear el usuario", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -64,19 +59,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void registrarUsuario(View view) {
-        Intent intent = new Intent(this, RegistroActivity.class);
-        startActivity(intent);
-    }
+        String usuario = String.valueOf(edtRUsuario.getText());
+        String contraseña = String.valueOf(edtRContraseña.getText());
 
-    public void inciarSesión(View view) {
-        String usuario = String.valueOf(edtLUsuario.getText());
-        String contraseña = String.valueOf(edtLContraseña.getText());
-
-        firebaseAuth.signInWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.createUserWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistroActivity.this, "Error al crear el usuario", Toast.LENGTH_LONG).show();
+                }else {
+                    FirebaseUser usuario = firebaseAuth.getCurrentUser();
+                    usuario.sendEmailVerification();
                 }
             }
         });

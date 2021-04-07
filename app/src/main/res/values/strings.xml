@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Tutorial Firebase</string>
+    <string name="usuario">Usuario</string>
+    <string name="inciar_sesion">INCIAR SESIÓN</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="registrarse">REGISTRARSE</string>
+    <string name="confirmar_registro">CONFIRMAR REGISTRO</string>
 </resources>

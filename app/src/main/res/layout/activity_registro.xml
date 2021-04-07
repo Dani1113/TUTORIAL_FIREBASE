@@ -5,10 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    tools:context=".RegistroActivity">
+
+    <Button
+        android:id="@+id/btRRegistrar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:onClick="registrarUsuario"
+        android:text="@string/confirmar_registro"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/edtRContraseña"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edtRContraseña"
+        app:layout_constraintTop_toBottomOf="@+id/edtRContraseña" />
 
     <EditText
-        android:id="@+id/edtLUsuario"
+        android:id="@+id/edtRUsuario"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="176dp"
@@ -20,12 +33,12 @@
         android:textColorHint="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtLContraseña"
+        android:id="@+id/edtRContraseña"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -36,34 +49,8 @@
         android:textColor="@color/white"
         android:textColorHint="@color/colorAccent"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/edtLUsuario"
+        app:layout_constraintEnd_toEndOf="@+id/edtRUsuario"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edtLUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/edtLUsuario" />
-
-    <Button
-        android:id="@+id/btLIniciarS"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/inciar_sesion"
-        android:textSize="18sp"
-        android:onClick="inciarSesión"
-        app:layout_constraintEnd_toEndOf="@+id/edtLContraseña"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edtLContraseña"
-        app:layout_constraintTop_toBottomOf="@+id/edtLContraseña" />
-
-    <Button
-        android:id="@+id/btLRegistrar"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/registrarse"
-        android:textSize="18sp"
-        android:onClick="registrarUsuario"
-        app:layout_constraintEnd_toEndOf="@+id/btLIniciarS"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btLIniciarS"
-        app:layout_constraintTop_toBottomOf="@+id/btLIniciarS" />
+        app:layout_constraintStart_toStartOf="@+id/edtRUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/edtRUsuario" />
 </androidx.constraintlayout.widget.ConstraintLayout>
