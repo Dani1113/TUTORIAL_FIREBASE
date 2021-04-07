@@ -81,4 +81,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void inciarSesiónGoogle(View view) {
+        Toast.makeText(this, "Opción no disponible por el momento", Toast.LENGTH_LONG).show();
+    }
+
+    public void inciarSesiónFacebook(View view) {
+        Toast.makeText(this, "Opción no disponible por el momento", Toast.LENGTH_LONG).show();
+    }
 }

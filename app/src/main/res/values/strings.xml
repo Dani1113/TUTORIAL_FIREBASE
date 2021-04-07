@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Tutorial Firebase</string>
-    <string name="usuario">Usuario</string>
+    <string name="usuario">Usuario:</string>
     <string name="inciar_sesion">INCIAR SESIÓN</string>
-    <string name="contraseña">Contraseña</string>
+    <string name="contraseña">Contraseña:</string>
     <string name="registrarse">REGISTRARSE</string>
     <string name="confirmar_registro">CONFIRMAR REGISTRO</string>
+    <string name="reg_strate">¡Regístrate!</string>
+    <string name="no_tienes_una_cuenta">¿No tienes una cuenta?</string>
+    <string name="inicio">INICIO</string>
+    <string name="has_olvidado_tu_contrase_a">¿Has olvidado tu contraseña?</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
 </resources>
