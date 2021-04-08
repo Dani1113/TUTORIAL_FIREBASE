@@ -33,20 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser usuario = firebaseAuth.getCurrentUser();
-                if(usuario != null){
-                    if(!usuario.isEmailVerified()){
-                        Toast.makeText(MainActivity.this, "E-mail no verificado" + usuario.getEmail(), Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(MainActivity.this, "Navegando al activity del chat", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                        startActivity(intent);
-                    }
-                }
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser usuario = firebaseAuth.getCurrentUser();
+            if(usuario != null){
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
             }
-        };
+        }};
     }
 
     @Override
@@ -72,14 +66,7 @@ public class MainActivity extends AppCompatActivity {
         String usuario = String.valueOf(edtLUsuario.getText());
         String contraseña = String.valueOf(edtLContraseña.getText());
 
-        firebaseAuth.signInWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        validacionIncioSesión(usuario, contraseña);
     }
 
     public void inciarSesiónGoogle(View view) {
@@ -88,5 +75,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void inciarSesiónFacebook(View view) {
         Toast.makeText(this, "Opción no disponible por el momento", Toast.LENGTH_LONG).show();
+    }
+
+    public void recordarContraseña(View view) {
+        Intent intent = new Intent(MainActivity.this, RecuperarPasswordActivity.class);
+        startActivity(intent);
+    }
+
+    private void validacionIncioSesión(String usuario, String contraseña) {
+        if(!usuario.isEmpty() && !contraseña.isEmpty()){
+            if(usuario.contains("@")){
+                if(contraseña.length() >= 6){
+                    firebaseAuth.signInWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!task.isSuccessful()){
+                                Toast.makeText(MainActivity.this, "Error al inciar sesión", Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                        }
+                    });
+                }else {
+                    Toast.makeText(this, "La contraseña debe de tener 6 caracteres o más", Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(this, "Formato de usuario incorrecto (debe incluir @)", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
     }
 }

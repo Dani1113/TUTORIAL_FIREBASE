@@ -11,4 +11,17 @@
     <string name="has_olvidado_tu_contrase_a">¿Has olvidado tu contraseña?</string>
     <string name="google">Google</string>
     <string name="facebook">Facebook</string>
+    <string name="cerrar_sesion">CERRAR SESIÓN</string>
+    <string name="registro">REGISTRO</string>
+    <string name="mi_cuenta">MI CUENTA</string>
+    <string name="salinapps_service">SalinApps Service</string>
+    <string name="pulsa_el_siguiente_bot_n_para_acceder_al_chat">Pulsa el siguiente botón para acceder al chat</string>
+    <string name="cuenta_inactiva">CUENTA INACTIVA</string>
+    <string name="entrar_al_chat">Entrar al chat</string>
+    <string name="pulsa_aqu_para_activar_tu_cuenta">Pulsa aquí para activar tu cuenta</string>
+    <string name="aseg_rate_de_tener_tu_cuenta_activa">Asegúrate de tener tu cuenta activa</string>
+    <string name="recuperar">recuperar</string>
+    <string name="restaurar_contrase_a">RESTAURAR CONTRASEÑA</string>
+    <string name="por_favor_escribe_tu_usuario">Por favor, escribe tu usuario:</string>
+    <string name="confirmar_contraseña">Confirmar contraseña:</string>
 </resources>
