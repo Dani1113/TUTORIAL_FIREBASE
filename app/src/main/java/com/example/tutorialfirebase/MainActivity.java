@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser usuario = firebaseAuth.getCurrentUser();
             if(usuario != null){
-                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
                 startActivity(intent);
             }
         }};

@@ -40,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
             FirebaseUser usuario = firebaseAuth.getCurrentUser();
             if(usuario != null){
                 Toast.makeText(RegistroActivity.this, "Usuario registrado, sesión iniciada", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistroActivity.this, ChatActivity.class);
+                Intent intent = new Intent(RegistroActivity.this, PerfilActivity.class);
                 startActivity(intent);
                 finish();
             }
