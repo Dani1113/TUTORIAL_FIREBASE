@@ -138,7 +138,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ENVIAR_IMAGEN && requestCode == RESULT_OK) {
+        if(requestCode == ENVIAR_IMAGEN && resultCode == RESULT_OK) {
             Uri u = data.getData();
             storageReference = storage.getReference("imagenes_chat"); //Nombre de la carpeta donde se guaradaran las imágenes
             final StorageReference imagenReferencia = storageReference.child(u.getLastPathSegment());
