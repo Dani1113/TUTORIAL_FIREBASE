@@ -1,5 +1,6 @@
 package com.example.tutorialfirebase;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class PerfilActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     private TextView txtPCuenta;
     private TextView txtPActivar;
@@ -27,13 +30,24 @@ public class PerfilActivity extends AppCompatActivity {
         txtPActivar = (TextView) findViewById(R.id.txtPActivar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser usuario = firebaseAuth.getCurrentUser();
+                if(usuario == null){
+                    Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
     }
 
     public void cerrarSesión(View view) {
         firebaseAuth.signOut();
         Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
-        finish();
+        Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     public void entrarAlChat(View view) {
@@ -42,8 +56,8 @@ public class PerfilActivity extends AppCompatActivity {
             txtPCuenta.setVisibility(View.VISIBLE);
             txtPActivar.setVisibility(View.VISIBLE);
         } else {
-            txtPCuenta.setVisibility(View.INVISIBLE);
-            txtPActivar.setVisibility(View.INVISIBLE);
+            txtPCuenta.setVisibility(View.GONE);
+            txtPActivar.setVisibility(View.GONE);
             Intent intent = new Intent(PerfilActivity.this, ChatActivity.class);
             startActivity(intent);
         }
@@ -53,8 +67,6 @@ public class PerfilActivity extends AppCompatActivity {
         Toast.makeText(this, "Revisa tu email", Toast.LENGTH_SHORT).show();
         FirebaseUser usuario = firebaseAuth.getCurrentUser();
         usuario.sendEmailVerification();
-        Intent intent = new Intent(PerfilActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        firebaseAuth.signOut();
     }
 }

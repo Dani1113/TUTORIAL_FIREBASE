@@ -13,7 +13,7 @@
         <activity android:name=".RecuperarPasswordActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

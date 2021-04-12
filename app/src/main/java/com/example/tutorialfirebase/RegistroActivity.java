@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegistroActivity extends AppCompatActivity {
@@ -39,10 +42,9 @@ public class RegistroActivity extends AppCompatActivity {
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser usuario = firebaseAuth.getCurrentUser();
             if(usuario != null){
-                Toast.makeText(RegistroActivity.this, "Usuario registrado, sesión iniciada", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistroActivity.this, PerfilActivity.class);
+                firebaseAuth.signOut();
+                Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         }};
     }
@@ -62,42 +64,53 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public void registrarUsuario(View view) {
+        validaciónRegistroUsuario();
+    }
+
+    private void validaciónRegistroUsuario() {
         String usuario = String.valueOf(edtRUsuario.getText());
         String contraseña = String.valueOf(edtRContraseña.getText());
         String confirmarContraseña = String.valueOf(edtRConfirmarContraseña.getText());
 
-        validaciónRegistroUsuario(usuario, contraseña, confirmarContraseña);
+        if (usuario.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty()) {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        } else if (!usuario.contains("@")) {
+            edtRUsuario.setError("Formato de usuario incorrecto (debe incluir @)");
+        } else if (contraseña.length() < 6) {
+            edtRContraseña.setError("La contraseña debe de tener 6 caracteres o más");
+        } else if (!contraseña.equalsIgnoreCase(confirmarContraseña)) {
+            edtRConfirmarContraseña.setError("Las contraseñas no coinciden");
+        } else {
+            firebaseAuth.signInWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(!task.isSuccessful()){
+                        Log.i("Error", "Excepción " + task.getException().toString());
+                        try{
+                            throw task.getException();
+                        }catch (FirebaseAuthInvalidUserException e){
+                            crearUsuarioFirebase(usuario, contraseña);
+                        } catch (FirebaseAuthInvalidCredentialsException e){
+                            Toast.makeText(RegistroActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
     }
 
-    private void validaciónRegistroUsuario(String usuario, String contraseña, String confirmarContraseña) {
-        if(!usuario.isEmpty() && !contraseña.isEmpty() && !confirmarContraseña.isEmpty()){
-            if(usuario.contains("@")){
-                if(contraseña.length() >= 6 && confirmarContraseña.length() >= 6){
-                    if(contraseña.equalsIgnoreCase(confirmarContraseña)){
-                        firebaseAuth.createUserWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(!task.isSuccessful()){
-                                    Toast.makeText(RegistroActivity.this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }else {
-                                    Toast.makeText(RegistroActivity.this, "Se le ha enviado un email para verificar su correo electrónico", Toast.LENGTH_SHORT).show();
-                                    FirebaseUser fUsuario = firebaseAuth.getCurrentUser();
-                                    fUsuario.sendEmailVerification();
-                                }
-                            }
-                        });
-                    }else {
-                        Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                    }
+    private void crearUsuarioFirebase(String usuario, String contraseña) {
+        firebaseAuth.createUserWithEmailAndPassword(usuario, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful()){
+                    Toast.makeText(RegistroActivity.this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(this, "La contraseña debe de tener 6 caracteres o más", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistroActivity.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
                 }
-            }else {
-                Toast.makeText(this, "Formato de usuario incorrecto (debe incluir @)", Toast.LENGTH_SHORT).show();
             }
-        }else {
-            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
-        }
+        });
     }
 }
