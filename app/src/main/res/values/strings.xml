@@ -28,4 +28,8 @@
     <string name="escriba_un_mensaje">Escriba un mensaje</string>
     <string name="dani">Dani</string>
     <string name="enviarimagen">enviarImagen</string>
+    <string name="confirmar_registro_de_usuario">CONFIRMAR REGISTRO DE USUARIO</string>
+    <string name="confirmar_registro_de_empresa">CONFIRMAR REGISTRO DE EMPRESA</string>
+    <string name="email">Email:</string>
+    <string name="nombre">Nombre:</string>
 </resources>
