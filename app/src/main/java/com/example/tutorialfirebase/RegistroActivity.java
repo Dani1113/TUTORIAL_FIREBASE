@@ -33,7 +33,6 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText edtRConfirmarContraseña;
     private EditText edtRNombre;
 
-
     private FirebaseFirestore db;
 
     @Override

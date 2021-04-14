@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/menuUsuarios">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/usuarios"/>
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/galer_a_usuarios"/>
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/slideshow_usuarios"/>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/menuEmpresas">
+        <item
+            android:id="@+id/nav_homeEmpresa"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/empresas"/>
+        <item
+            android:id="@+id/nav_galleryEmpresa"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/galer_a_empresas"/>
+        <item
+            android:id="@+id/nav_slideshowEmpresa"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/slideshow_empresas"/>
+    </group>
+
+    <item android:title="@string/registro">
+        <menu>
+            <item
+                android:id="@+id/logoutMenu"
+                android:title="@string/salir_de_la_cuenta"/>
+            <item
+                android:id="@+id/volverInicio"
+                android:title="@string/volver_a_la_ventana_principal"/>
+            <item
+                android:id="@+id/loginMenu"
+                android:title="@string/iniciar_sesi_n"/>
+        </menu>
+    </item>
+</menu>

@@ -37,7 +37,6 @@ public class PerfilActivity extends AppCompatActivity {
                 if(usuario == null){
                     Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    finish();
                 }
             }
         };

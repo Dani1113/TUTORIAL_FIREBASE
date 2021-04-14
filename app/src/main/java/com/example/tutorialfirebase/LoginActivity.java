@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             if(usuario != null){
                 if(!nuevoUsuario){
                     Toast.makeText(LoginActivity.this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }

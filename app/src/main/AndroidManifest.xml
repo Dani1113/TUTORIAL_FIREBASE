@@ -9,17 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialFirebase">
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".RecuperarPasswordActivity" />
-        <activity android:name=".PerfilActivity" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.TutorialFirebase.NoActionBar"></activity>
+        <activity android:name=".BienvenidaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".RecuperarPasswordActivity" />
+        <activity android:name=".PerfilActivity" />
+        <activity android:name=".RegistroActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

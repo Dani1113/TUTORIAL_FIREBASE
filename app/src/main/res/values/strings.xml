@@ -32,4 +32,26 @@
     <string name="confirmar_registro_de_empresa">CONFIRMAR REGISTRO DE EMPRESA</string>
     <string name="email">Email:</string>
     <string name="nombre">Nombre:</string>
+    <string name="bienvenid_a_nuestra_app">¡BIENVENID@ A NUESTRA APP!</string>
+    <string name="entrar_ya">¡ENTRAR YA!</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="salir_de_la_cuenta">Salir de la cuenta</string>
+    <string name="volver_a_la_ventana_principal">Volver a la ventana principal</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="galer_a_usuarios">GALERÍA USUARIOS</string>
+    <string name="usuarios">USUARIOS</string>
+    <string name="slideshow_usuarios">SLIDESHOW USUARIOS</string>
+    <string name="empresas">EMPRESAS</string>
+    <string name="galer_a_empresas">GALERÍA EMPRESAS</string>
+    <string name="slideshow_empresas">SLIDESHOW EMPRESAS</string>
 </resources>
