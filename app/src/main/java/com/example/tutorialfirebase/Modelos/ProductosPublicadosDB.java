@@ -169,7 +169,8 @@ public class ProductosPublicadosDB {
 
     }
 
-    public static boolean actualizarProducto(ProductosPublicados p){ //Se supone que el idproductoempresa no se puede modificar
+    /*
+    public static boolean actualizarProductoPublicado(ProductosPublicados p){ //Se supone que el idproductoempresa no se puede modificar
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if (conexión == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");
@@ -199,7 +200,6 @@ public class ProductosPublicadosDB {
             int filasAfectadas1 = sentenciaPreparada2.executeUpdate();
             sentenciaPreparada2.close();
 
-            /*
             COMO HAGO ESTO¿?
             String ordenSQL3 = "UPDATE productos SET cod_producto = ? WHERE idproductoempresa = ?";
             PreparedStatement sentenciaPreparada3 = conexión.prepareStatement(ordenSQL3);
@@ -207,7 +207,7 @@ public class ProductosPublicadosDB {
             sentenciaPreparada3.setInt(2, idproductoempresa);
             int filasAfectadas2 = sentenciaPreparada3.executeUpdate();
             sentenciaPreparada3.close();
-            */
+
             conexión.close();
 
             if ((filasAfectadas1 > 0 && filasAfectadas2 > 0) || (filasAfectadas1 == 0 && filasAfectadas2 > 0)){ //La consulta se ejecutará si se han actualizado 2 filas (1ª condicion del if) o si solo se han actualizado filas en la tabla moda (2ª condicion del if)
@@ -220,4 +220,5 @@ public class ProductosPublicadosDB {
             return false;
         }
     }
+    */
 }
