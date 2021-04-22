@@ -10,7 +10,7 @@ public class TareaObtenerProductoPublicado implements Callable<ArrayList<Product
     private ArrayList<ProductosPublicados> productosPublicadosDevueltos = null;
     private int página;
 
-    public TareaObtenerProductoPublicado(int página) {
+    public  TareaObtenerProductoPublicado(int página) {
         this.página = página;
     }
 

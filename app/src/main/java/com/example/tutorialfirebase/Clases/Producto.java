@@ -7,14 +7,12 @@ import androidx.annotation.RequiresApi;
 import java.util.Objects;
 
 public class Producto {
-    //ATRIBUTOS
     private String cod_producto;
     private String cod_QR;
     private String marca;
     private String modelo;
     private String descripción;
 
-    //CONSTRUCTORES
     public Producto(String cod_producto, String cod_QR, String marca, String modelo, String descripción) {
         this.cod_producto = cod_producto;
         this.cod_QR = cod_QR;
@@ -23,7 +21,6 @@ public class Producto {
         this.descripción = descripción;
     }
 
-    //GETTERS & SETTERS
     public String getCod_producto() {
         return cod_producto;
     }
@@ -64,7 +61,6 @@ public class Producto {
         this.descripción = descripción;
     }
 
-    //HASH CODE & EQUALS
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,7 +75,6 @@ public class Producto {
         return Objects.hash(cod_producto);
     }
 
-    //TO STRING
     @Override
     public String toString() {
         return "Productos{" +
