@@ -26,17 +26,25 @@ public class ModaDB {
         try {
             Statement sentencia = conexión.createStatement();
             int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            String ordenSQL = "SELECT * FROM moda LIMIT" + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL = "SELECT DISTINCT * FROM moda m INNER JOIN productos p ON (m.cod_producto = p.cod_producto) LIMIT" + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
             while(resultado.next()) {
-                //Interesa recoger moda con cod_producto como un objeto de la clase Producto? O simplemente el cod_producto?¿
+                //PRODUCTO
                 String cod_producto = resultado.getString("cod_producto");
+                String cod_QR = resultado.getString("cod_QR");
+                String marca = resultado.getString("marca");
+                String modelo = resultado.getString("modelo");
+                String descripcion = resultado.getString("descripcion");
+
+                //MODA
                 String talla = resultado.getString("talla");
                 String color = resultado.getString("color");
                 String material = resultado.getString("material");
                 String sexo = resultado.getString("sexo");
                 String categoria_moda = resultado.getString("categoria_moda");
-                Moda m = new Moda(cod_producto, talla, color, material, sexo, categoria_moda);
+
+                Producto p = new Producto(cod_producto, cod_QR, marca, modelo, descripcion);
+                Moda m = new Moda(p, talla, color, material, sexo, categoria_moda);
                 modaDevuelta.add(m);
             }
             resultado.close();
@@ -175,54 +183,4 @@ public class ModaDB {
 
     }
 
-    //REPASAR ESTE MÉTODO
-    public static boolean actualizarModa(Moda m){ //Se entiende que el cod_producto de la tabla moda no se puede modificar. Este método esta hecho para que se actualize siempre la tabla de productos por si acaso se pueden crear registros en moda sin haber un registro en productos previamente
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
-            Log.i("SQL", "Error al establecer la conexión con la base de datos");
-            return false;
-        }
-        try {
-            //Recojo el cod_producto
-            String cod_producto = "";
-            String ordenSQL1 = "SELECT cod_producto FROM moda WHERE talla = ?;";
-            PreparedStatement sentenciaPreparada1 = conexión.prepareStatement(ordenSQL1);
-            sentenciaPreparada1.setString(1, m.getTalla());
-            ResultSet resultado = sentenciaPreparada1.executeQuery();
-            while(resultado.next()) {
-                cod_producto = resultado.getString("cod_producto");
-            }
-            resultado.close();
-            sentenciaPreparada1.close();
-
-            String ordenSQL3 = "UPDATE moda SET talla = ?, color = ?, material = ?, sexo = ?, categoria_moda = ? WHERE cod_producto = ?";
-            PreparedStatement sentenciaPreparada3 = conexión.prepareStatement(ordenSQL3);
-            sentenciaPreparada3.setString(1, m.getTalla());
-            sentenciaPreparada3.setString(2, m.getColor());
-            sentenciaPreparada3.setString(3, m.getMaterial());
-            sentenciaPreparada3.setString(4, m.getSexo());
-            sentenciaPreparada3.setString(5, m.getCategoria_moda());
-            sentenciaPreparada3.setString(6, cod_producto);
-            int filasAfectadas2 = sentenciaPreparada3.executeUpdate();
-            sentenciaPreparada3.close();
-
-            String ordenSQL2 = "UPDATE productos SET cod_producto = ? WHERE cod_producto = ?";
-            PreparedStatement sentenciaPreparada2 = conexión.prepareStatement(ordenSQL2);
-            sentenciaPreparada2.setString(1, m.getCod_producto());
-            sentenciaPreparada2.setString(2, cod_producto);
-            int filasAfectadas1 = sentenciaPreparada2.executeUpdate();
-            sentenciaPreparada2.close();
-
-            conexión.close();
-
-            if ((filasAfectadas1 > 0 && filasAfectadas2 > 0) || (filasAfectadas1 == 0 && filasAfectadas2 > 0)){ //La consulta se ejecutará si se han actualizado 2 filas (1ª condicion del if) o si solo se han actualizado filas en la tabla moda (2ª condicion del if)
-                return true;
-            }else {
-                return false;
-            }
-        }catch (SQLException e){
-            Log.i("SQL", "Error al actualizar el registro de moda en la base de datos");
-            return false;
-        }
-    }
 }

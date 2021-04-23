@@ -8,8 +8,8 @@ public class Moda extends Producto{
     private String sexo;
     private String categoria_moda;
 
-    public Moda(String cod_producto, String cod_QR, String marca, String modelo, String descripción, Producto p, String talla, String color, String material, String sexo, String categoria_moda) {
-        super(cod_producto, cod_QR, marca, modelo, descripción);
+    public Moda(Producto p, String talla, String color, String material, String sexo, String categoria_moda) {
+        super(p.getCod_producto(), p.getCod_QR(), p.getMarca(), p.getModelo(), p.getDescripción());
         this.p = p;
         this.talla = talla;
         this.color = color;

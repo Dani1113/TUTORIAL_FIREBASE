@@ -15,9 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductosPublicadosDB {
-
-    //COD_EMPRESA NO ES ESTA TENIENDO EN CUENTA EN NINGUNA CONSULTA
-
     public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página){
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if(conexión == null) {
@@ -34,10 +31,11 @@ public class ProductosPublicadosDB {
                 int idproductoempresa = resultado.getInt("idproductoempresa");
                 int cantidad = resultado.getInt("cantidad");
                 double precioventa = resultado.getDouble("precioventa");
-                int habilitado = resultado.getInt("habilitado");
-                int archivado = resultado.getInt("archivado");
-                String cod_producto = resultado.getString("cod_product");
-                ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto);
+                boolean habilitado = resultado.getBoolean("habilitado");
+                boolean archivado = resultado.getBoolean("archivado");
+                String cod_producto = resultado.getString("cod_producto");
+                String cod_empresa = resultado.getString("cod_empresa");
+                ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto, cod_empresa);
                 productosPublicadosDevueltos.add(p);
             }
             resultado.close();
@@ -70,8 +68,9 @@ public class ProductosPublicadosDB {
                 double precioventa = resultado.getDouble("precioventa");
                 int habilitado = resultado.getInt("habilitado");
                 int archivado = resultado.getInt("archivado");
-                String cod_producto = resultado.getString("cod_product");
-                ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto);
+                String cod_producto = resultado.getString("cod_producto");
+                String cod_empresa = resultado.getString("cod_empresa");
+                ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto, cod_empresa);
                 productosPublicadosEncontrados.add(p);
             }
             resultado.close();
@@ -168,57 +167,4 @@ public class ProductosPublicadosDB {
         }
 
     }
-
-    /*
-    public static boolean actualizarProductoPublicado(ProductosPublicados p){ //Se supone que el idproductoempresa no se puede modificar
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
-            Log.i("SQL", "Error al establecer la conexión con la base de datos");
-            return false;
-        }
-        try {
-            //Recojo el idproductoempresa
-            int idproductoempresa = 0;
-            String ordenSQL1 = "SELECT idproductoempresa FROM productospublicados WHERE precioventa = ?;";
-            PreparedStatement sentenciaPreparada1 = conexión.prepareStatement(ordenSQL1);
-            sentenciaPreparada1.setDouble(1, p.getPrecioventa());
-            ResultSet resultado = sentenciaPreparada1.executeQuery();
-            while(resultado.next()) {
-                idproductoempresa = resultado.getInt("idproductoempresa");
-            }
-            resultado.close();
-            sentenciaPreparada1.close();
-
-            String ordenSQL2 = "UPDATE productospublicados SET cantidad = ?, precioventa = ?, habilitado = ?, archivado = ?, cod_producto = ? WHERE idproductoempresa = ?";
-            PreparedStatement sentenciaPreparada2 = conexión.prepareStatement(ordenSQL2);
-            sentenciaPreparada2.setInt(1, p.getCantidad());
-            sentenciaPreparada2.setDouble(2, p.getPrecioventa());
-            sentenciaPreparada2.setInt(3, p.getHabilitado());
-            sentenciaPreparada2.setInt(4, p.getArchivado());
-            sentenciaPreparada2.setString(5, p.getCod_producto());
-            sentenciaPreparada2.setInt(6, idproductoempresa);
-            int filasAfectadas1 = sentenciaPreparada2.executeUpdate();
-            sentenciaPreparada2.close();
-
-            COMO HAGO ESTO¿?
-            String ordenSQL3 = "UPDATE productos SET cod_producto = ? WHERE idproductoempresa = ?";
-            PreparedStatement sentenciaPreparada3 = conexión.prepareStatement(ordenSQL3);
-            sentenciaPreparada3.setString(1, p.getCod_producto());
-            sentenciaPreparada3.setInt(2, idproductoempresa);
-            int filasAfectadas2 = sentenciaPreparada3.executeUpdate();
-            sentenciaPreparada3.close();
-
-            conexión.close();
-
-            if ((filasAfectadas1 > 0 && filasAfectadas2 > 0) || (filasAfectadas1 == 0 && filasAfectadas2 > 0)){ //La consulta se ejecutará si se han actualizado 2 filas (1ª condicion del if) o si solo se han actualizado filas en la tabla moda (2ª condicion del if)
-                return true;
-            }else {
-                return false;
-            }
-        }catch (SQLException e){
-            Log.i("SQL", "Error al actualizar el producto publicado en la base de datos");
-            return false;
-        }
-    }
-    */
 }
