@@ -2,10 +2,8 @@ package com.example.tutorialfirebase.Controladores;
 
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaActualizarProductoPublicado;
-import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaBorrarProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaBuscarProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaCantidadProductoPublicado;
-import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaInsertarProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaObtenerProductoPublicado;
 
 import java.util.ArrayList;
@@ -83,56 +81,6 @@ public class ProductoPublicadoController {
             e.printStackTrace();
         }
         return cantidadProductoPublicado;
-    }
-
-    public static boolean insertarProductoPublicado(ProductosPublicados pp) {
-        FutureTask tarea = new FutureTask(new TareaInsertarProductoPublicado(pp));
-        ExecutorService es = Executors.newSingleThreadExecutor();
-        es.submit(tarea);
-        boolean insertadoOk = false;
-        try {
-            insertadoOk = (boolean) tarea.get();
-            es.shutdown();
-            try {
-                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
-                    es.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                es.shutdownNow();
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        finally {
-            return insertadoOk;
-        }
-    }
-
-    public static boolean borrarProductoPublicado(ProductosPublicados pp) {
-        FutureTask tarea = new FutureTask(new TareaBorrarProductoPublicado(pp));
-        ExecutorService es = Executors.newSingleThreadExecutor();
-        es.submit(tarea);
-        boolean borradoOk = false;
-        try {
-            borradoOk = (boolean) tarea.get();
-            es.shutdown();
-            try {
-                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
-                    es.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                es.shutdownNow();
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        finally {
-            return borradoOk;
-        }
     }
 
     public static boolean actualizarProductoPublicado(ProductosPublicados pp) {

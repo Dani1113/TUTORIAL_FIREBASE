@@ -44,9 +44,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation files('conector.jar')
-
-    //Para corregir el error de compilacion 'com.android.tools.r8.utils.b: Cannot fit requested classes in a single dex file (# methods: 107455 > 65536)'
+    implementation files('libs/mysql-connector-java-5.1.49.jar')
+//Para corregir el error de compilacion 'com.android.tools.r8.utils.b: Cannot fit requested classes in a single dex file (# methods: 107455 > 65536)'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

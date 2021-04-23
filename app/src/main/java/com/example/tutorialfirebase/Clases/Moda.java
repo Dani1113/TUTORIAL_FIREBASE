@@ -1,17 +1,16 @@
 package com.example.tutorialfirebase.Clases;
 
-public class Moda {
-    //ATRIBUTOS
-    private String cod_producto;
+public class Moda extends Producto{
+    private Producto p;
     private String talla;
     private String color;
     private String material;
     private String sexo;
     private String categoria_moda;
 
-    //CONSTRUCTORES
-    public Moda(String cod_producto, String talla, String color, String material, String sexo, String categoria_moda) {
-        this.cod_producto = cod_producto;
+    public Moda(String cod_producto, String cod_QR, String marca, String modelo, String descripción, Producto p, String talla, String color, String material, String sexo, String categoria_moda) {
+        super(cod_producto, cod_QR, marca, modelo, descripción);
+        this.p = p;
         this.talla = talla;
         this.color = color;
         this.material = material;
@@ -19,13 +18,12 @@ public class Moda {
         this.categoria_moda = categoria_moda;
     }
 
-    //GETTERS & SETTERS
-    public String getCod_producto() {
-        return cod_producto;
+    public Producto getP() {
+        return p;
     }
 
-    public void setCod_producto(String cod_producto) {
-        this.cod_producto = cod_producto;
+    public void setP(Producto p) {
+        this.p = p;
     }
 
     public String getTalla() {
@@ -68,11 +66,10 @@ public class Moda {
         this.categoria_moda = categoria_moda;
     }
 
-    //TO STRING
     @Override
     public String toString() {
         return "Moda{" +
-                "cod_producto=" + cod_producto +
+                "p=" + p +
                 ", talla='" + talla + '\'' +
                 ", color='" + color + '\'' +
                 ", material='" + material + '\'' +

@@ -7,26 +7,24 @@ import androidx.annotation.RequiresApi;
 import java.util.Objects;
 
 public class ProductosPublicados {
-    //ATRIBUTOS
     private int idproductoempresa;
     private int cantidad;
     private double precioventa;
-    private int habilitado;
-    private int archivado;
-    private String cod_producto; //¿Deberia ser un atributo de tipo Producto?
-    //private Empresa cod_empresa; ¿La tabla empresa la vamos a usar al final?
+    private boolean habilitado;
+    private boolean archivado;
+    private Producto p;
+    private Empresa e;
 
-    //CONSTRUCTORES
-    public ProductosPublicados(int idproductoempresa, int cantidad, double precioventa, int habilitado, int archivado, String cod_producto) {
+    public ProductosPublicados(int idproductoempresa, int cantidad, double precioventa, boolean habilitado, boolean archivado, Producto p, Empresa e) {
         this.idproductoempresa = idproductoempresa;
         this.cantidad = cantidad;
         this.precioventa = precioventa;
         this.habilitado = habilitado;
         this.archivado = archivado;
-        this.cod_producto = cod_producto;
+        this.p = p;
+        this.e = e;
     }
 
-    //GETTERS & SETTERS
     public int getIdproductoempresa() {
         return idproductoempresa;
     }
@@ -51,31 +49,38 @@ public class ProductosPublicados {
         this.precioventa = precioventa;
     }
 
-    public int getHabilitado() {
+    public boolean isHabilitado() {
         return habilitado;
     }
 
-    public void setHabilitado(int habilitado) {
+    public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
     }
 
-    public int getArchivado() {
+    public boolean isArchivado() {
         return archivado;
     }
 
-    public void setArchivado(int archivado) {
+    public void setArchivado(boolean archivado) {
         this.archivado = archivado;
     }
 
-    public String getCod_producto() {
-        return cod_producto;
+    public Producto getP() {
+        return p;
     }
 
-    public void setCod_producto(String cod_producto) {
-        this.cod_producto = cod_producto;
+    public void setP(Producto p) {
+        this.p = p;
     }
 
-    //HASH CODE & EQUALS
+    public Empresa getE() {
+        return e;
+    }
+
+    public void setE(Empresa e) {
+        this.e = e;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,7 +95,6 @@ public class ProductosPublicados {
         return Objects.hash(idproductoempresa);
     }
 
-    //TO STRING
     @Override
     public String toString() {
         return "ProductosPublicados{" +
@@ -99,7 +103,8 @@ public class ProductosPublicados {
                 ", precioventa=" + precioventa +
                 ", habilitado=" + habilitado +
                 ", archivado=" + archivado +
-                ", cod_producto=" + cod_producto +
+                ", p=" + p +
+                ", e=" + e +
                 '}';
     }
 }
