@@ -1,2 +1,3 @@
+include ':conector'
 include ':app'
 rootProject.name = "Tutorial Firebase"

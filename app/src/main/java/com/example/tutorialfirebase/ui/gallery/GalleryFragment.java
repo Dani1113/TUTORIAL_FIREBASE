@@ -12,7 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tutorialfirebase.Clases.Producto;
+import com.example.tutorialfirebase.Clases.ProductosPublicados;
+import com.example.tutorialfirebase.Controladores.ProductoPublicadoController;
 import com.example.tutorialfirebase.R;
+
+import java.util.ArrayList;
 
 public class GalleryFragment extends Fragment {
 
