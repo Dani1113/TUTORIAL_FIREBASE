@@ -28,12 +28,12 @@
     <string name="escriba_un_mensaje">Escriba un mensaje</string>
     <string name="dani">Dani</string>
     <string name="enviarimagen">enviarImagen</string>
-    <string name="confirmar_registro_de_usuario">CONFIRMAR REGISTRO DE USUARIO</string>
+    <string name="confirmar_registro_de_usuario">REGISTRAR</string>
     <string name="confirmar_registro_de_empresa">CONFIRMAR REGISTRO DE EMPRESA</string>
     <string name="email">Email:</string>
     <string name="nombre">Nombre:</string>
     <string name="bienvenid_a_nuestra_app">¡BIENVENID@ A NUESTRA APP!</string>
-    <string name="entrar_ya">¡ENTRAR YA!</string>
+    <string name="entrar_ya">Usuarios</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
