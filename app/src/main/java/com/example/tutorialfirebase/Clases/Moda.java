@@ -1,29 +1,19 @@
 package com.example.tutorialfirebase.Clases;
 
 public class Moda extends Producto{
-    private Producto p;
     private String talla;
     private String color;
     private String material;
     private String sexo;
     private String categoria_moda;
 
-    public Moda(Producto p, String talla, String color, String material, String sexo, String categoria_moda) {
-        super(p.getCod_producto(), p.getCod_QR(), p.getMarca(), p.getModelo(), p.getDescripción());
-        this.p = p;
+    public Moda(String cod_producto, String cod_QR, String marca, String modelo, String descripción, int id_foto, String talla, String color, String material, String sexo, String categoria_moda) {
+        super(cod_producto, cod_QR, marca, modelo, descripción, id_foto);
         this.talla = talla;
         this.color = color;
         this.material = material;
         this.sexo = sexo;
         this.categoria_moda = categoria_moda;
-    }
-
-    public Producto getP() {
-        return p;
-    }
-
-    public void setP(Producto p) {
-        this.p = p;
     }
 
     public String getTalla() {
@@ -69,8 +59,7 @@ public class Moda extends Producto{
     @Override
     public String toString() {
         return "Moda{" +
-                "p=" + p +
-                ", talla='" + talla + '\'' +
+                "talla='" + talla + '\'' +
                 ", color='" + color + '\'' +
                 ", material='" + material + '\'' +
                 ", sexo='" + sexo + '\'' +

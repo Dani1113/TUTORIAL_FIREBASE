@@ -16,7 +16,7 @@ public class TareaBuscarProductoPublicado implements Callable<ArrayList<Producto
 
     @Override
     public ArrayList<ProductosPublicados> call() throws Exception {
-        productosPublicadosEncontrados = ProductosPublicadosDB.buscarProductoPublicados(cod_producto);
+        //productosPublicadosEncontrados = ProductosPublicadosDB.buscarProductoPublicados(cod_producto);
         return productosPublicadosEncontrados;
     }
 }

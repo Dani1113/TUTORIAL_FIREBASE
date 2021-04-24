@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 public class Producto {
@@ -12,13 +13,15 @@ public class Producto {
     private String marca;
     private String modelo;
     private String descripción;
+    private int id_foto;
 
-    public Producto(String cod_producto, String cod_QR, String marca, String modelo, String descripción) {
+    public Producto(String cod_producto, String cod_QR, String marca, String modelo, String descripción, int id_foto) {
         this.cod_producto = cod_producto;
         this.cod_QR = cod_QR;
         this.marca = marca;
         this.modelo = modelo;
         this.descripción = descripción;
+        this.id_foto = id_foto;
     }
 
     public String getCod_producto() {
@@ -61,6 +64,14 @@ public class Producto {
         this.descripción = descripción;
     }
 
+    public int getId_foto() {
+        return id_foto;
+    }
+
+    public void setId_foto(int id_foto) {
+        this.id_foto = id_foto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,12 +88,13 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Productos{" +
+        return "Producto{" +
                 "cod_producto='" + cod_producto + '\'' +
                 ", cod_QR='" + cod_QR + '\'' +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", descripción='" + descripción + '\'' +
+                ", id_foto=" + id_foto +
                 '}';
     }
 }

@@ -5,7 +5,7 @@ import com.example.tutorialfirebase.Modelos.ProductosPublicadosDB;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-
+//REPASAR CLASE
 public class TareaObtenerProductoPublicado implements Callable<ArrayList<ProductosPublicados>> {
     private ArrayList<ProductosPublicados> productosPublicadosDevueltos = null;
     private int página;

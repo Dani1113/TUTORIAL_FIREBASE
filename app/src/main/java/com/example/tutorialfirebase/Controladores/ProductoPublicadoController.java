@@ -1,7 +1,6 @@
 package com.example.tutorialfirebase.Controladores;
 
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
-import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaActualizarProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaBuscarProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaCantidadProductoPublicado;
 import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaObtenerProductoPublicado;
@@ -37,6 +36,7 @@ public class ProductoPublicadoController {
         return productosPublicadosDevuelto;
     }
 
+    //REPASAR MÉTODO
     public static ArrayList<ProductosPublicados> buscarProductoPublicado(String cod_producto){
         ArrayList<ProductosPublicados> productoPublicadoEncontrado = null;
         FutureTask tarea = new FutureTask(new TareaBuscarProductoPublicado(cod_producto));
@@ -81,30 +81,5 @@ public class ProductoPublicadoController {
             e.printStackTrace();
         }
         return cantidadProductoPublicado;
-    }
-
-    public static boolean actualizarProductoPublicado(ProductosPublicados pp) {
-        FutureTask tarea = new FutureTask(new TareaActualizarProductoPublicado(pp));
-        ExecutorService es = Executors.newSingleThreadExecutor();
-        es.submit(tarea);
-        boolean actualizadoOk = false;
-        try {
-            actualizadoOk = (boolean) tarea.get();
-            es.shutdown();
-            try {
-                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
-                    es.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                es.shutdownNow();
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        finally {
-            return actualizadoOk;
-        }
     }
 }
