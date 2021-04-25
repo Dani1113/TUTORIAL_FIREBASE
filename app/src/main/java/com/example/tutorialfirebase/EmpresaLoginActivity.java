@@ -107,8 +107,12 @@ public class EmpresaLoginActivity extends AppCompatActivity {
     }
 
     public void signupEmpresa(View view) {
+        Intent intent = new Intent(EmpresaLoginActivity.this,EmpresaRegistroActivity.class);
+        startActivity(intent);
     }
 
     public void recordarPassEmpresa(View view) {
+        Intent intent = new Intent(EmpresaLoginActivity.this,RecuperarPasswordActivity.class);
+        startActivity(intent);
     }
 }
