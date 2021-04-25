@@ -1,5 +1,11 @@
 package com.example.tutorialfirebase.Clases;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.util.Objects;
+
 public class Empresa {
     private String cod_empresa;
     private String clave_empr;
@@ -33,5 +39,28 @@ public class Empresa {
 
     public void setDatos_empr(String datos_empr) {
         this.datos_empr = datos_empr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empresa empresa = (Empresa) o;
+        return cod_empresa.equals(empresa.cod_empresa);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(cod_empresa);
+    }
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "cod_empresa='" + cod_empresa + '\'' +
+                ", clave_empr='" + clave_empr + '\'' +
+                ", datos_empr='" + datos_empr + '\'' +
+                '}';
     }
 }

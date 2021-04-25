@@ -2,6 +2,8 @@ package com.example.tutorialfirebase.Modelos;
 
 import android.util.Log;
 
+import com.example.tutorialfirebase.Clases.Empresa;
+import com.example.tutorialfirebase.Clases.Moda;
 import com.example.tutorialfirebase.Clases.Producto;
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
@@ -15,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductosPublicadosDB {
+    private static Empresa empresa;
+
     public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página){
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if(conexión == null) {
@@ -24,22 +28,45 @@ public class ProductosPublicadosDB {
         ArrayList<ProductosPublicados> productosPublicadosDevueltos = new ArrayList<ProductosPublicados>();
         try {
             Statement sentencia = conexión.createStatement();
-            int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            String ordenSQL = "SELECT * FROM productospublicados LIMIT" + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL = "SELECT * FROM empresas";
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
-            while(resultado.next()) {
-                int idproductoempresa = resultado.getInt("idproductoempresa");
-                int cantidad = resultado.getInt("cantidad");
-                double precioventa = resultado.getDouble("precioventa");
-                boolean habilitado = resultado.getBoolean("habilitado");
-                boolean archivado = resultado.getBoolean("archivado");
-                String cod_producto = resultado.getString("cod_producto");
-                String cod_empresa = resultado.getString("cod_empresa");
-                ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto, cod_empresa);
-                productosPublicadosDevueltos.add(p);
+            while (resultado.next()){
+                String cod_empr = resultado.getString("cod_empr");
+                String clave_empr = resultado.getString("clave_empr");
+                String datos_empr = resultado.getString("datos_empr");
+                empresa = new Empresa(cod_empr, clave_empr, datos_empr);
             }
             resultado.close();
             sentencia.close();
+
+            Statement sentencia2 = conexión.createStatement();
+            int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL2 = "SELECT p.cod_producto, p.cod_QR, p.marca, p.modelo, p.descripcion, p.idfoto, m.talla, m.color, m.material, m.sexo, m.categoria_moda, pp.idproductoempresa, pp.cantidad, pp.precioventa, pp.habilitado, pp.archivado FROM productos p INNER JOIN moda m INNER JOIN productospublicados pp ON (m.cod_producto = p.cod_producto AND p.cod_producto = pp.cod_producto) WHERE pp.habilitado = 1 AND pp.archivado = 0 LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            ResultSet resultado2 = sentencia2.executeQuery(ordenSQL2);
+            while(resultado2.next()) {
+                String cod_producto = resultado2.getString("cod_producto");
+                String cod_QR = resultado2.getString("cod_QR");
+                String marca = resultado2.getString("marca");
+                String modelo = resultado2.getString("modelo");
+                String descripción = resultado2.getString("descripcion");
+                int id_foto = resultado2.getInt("idfoto");
+                String talla = resultado2.getString("talla");
+                String color = resultado2.getString("color");
+                String material = resultado2.getString("material");
+                String sexo = resultado2.getString("sexo");
+                String categoria_moda = resultado2.getString("categoria_moda");
+                Moda moda = new Moda(cod_producto, cod_QR, marca, modelo, descripción, id_foto, talla, color, material, sexo, categoria_moda);
+
+                int idproductoempresa = resultado2.getInt("idproductoempresa");
+                int cantidad = resultado2.getInt("cantidad");
+                double precioventa = resultado2.getDouble("precioventa");
+                boolean habilitado = resultado2.getBoolean("habilitado");
+                boolean archivado = resultado2.getBoolean("archivado");
+                ProductosPublicados productoPublicado = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, moda, empresa);
+                productosPublicadosDevueltos.add(productoPublicado);
+            }
+            resultado2.close();
+            sentencia2.close();
 
             conexión.close();
 
@@ -50,6 +77,8 @@ public class ProductosPublicadosDB {
         }
     }
 
+    //REPASAR MÉTODO
+    /*
     public static ArrayList<ProductosPublicados> buscarProductoPublicados(String nombreP) {
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if (conexión == null) {
@@ -66,8 +95,8 @@ public class ProductosPublicadosDB {
                 int idproductoempresa = resultado.getInt("idproductoempresa");
                 int cantidad = resultado.getInt("cantidad");
                 double precioventa = resultado.getDouble("precioventa");
-                int habilitado = resultado.getInt("habilitado");
-                int archivado = resultado.getInt("archivado");
+                boolean habilitado = resultado.getBoolean("habilitado");
+                boolean archivado = resultado.getBoolean("archivado");
                 String cod_producto = resultado.getString("cod_producto");
                 String cod_empresa = resultado.getString("cod_empresa");
                 ProductosPublicados p = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto, cod_empresa);
@@ -83,6 +112,7 @@ public class ProductosPublicadosDB {
             return null;
         }
     }
+    */
 
     public static int obtenerCantidadProductosPublicados() {
         Connection conexión = BaseDB.conectarConBaseDeDatos();
@@ -108,63 +138,5 @@ public class ProductosPublicadosDB {
             Log.i("SQL", "Error al devolver el número de productos publicados de la base de datos");
             return 0;
         }
-    }
-
-    public static boolean insertarProductoPublicado(ProductosPublicados p){ //¿Se puede insertar un producto publicadop con un cod_producto que no esta previamente creado? De ser así habría que hacer un insert en productos y por tanto el cod_producto de productospublicados, debería de ser un atributo de tipo Producto, para poder hacer la insercion
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
-            Log.i("SQL", "Error al establecer la conexión con la base de datos");
-            return false;
-        }
-        try {
-            String ordenSQL = "INSERT INTO productospublicados (idproductoempresa, cantidad, precioventa, habilitado, archivado, cod_producto) VALUES (?, ?, ?, ?, ?, ?);";
-            PreparedStatement sentenciaPreparada = conexión.prepareStatement(ordenSQL);
-            sentenciaPreparada.setInt(1, p.getIdproductoempresa());
-            sentenciaPreparada.setInt(2, p.getCantidad());
-            sentenciaPreparada.setDouble(3, p.getPrecioventa());
-            sentenciaPreparada.setInt(4, p.getHabilitado());
-            sentenciaPreparada.setInt(5, p.getArchivado());
-            sentenciaPreparada.setString(6, p.getCod_producto());
-            int filasAfectadas = sentenciaPreparada.executeUpdate();
-            sentenciaPreparada.close();
-
-            conexión.close();
-
-            if (filasAfectadas > 0){
-                return true;
-            }else {
-                return false;
-            }
-        } catch (SQLException e){
-            Log.i("SQL", "Error al insertar el producto publicado en la base de datos");
-            return false;
-        }
-    }
-
-    public static boolean borrarProductoPublicado(ProductosPublicados p){
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
-            Log.i("SQL", "Error al establecer la conexión con la base de datos");
-            return false;
-        }
-        try {
-            String ordenSQL = "DELETE FROM productospublicados WHERE idproductoempresa = ?;";
-            PreparedStatement sentenciaPreparada = conexión.prepareStatement(ordenSQL);
-            sentenciaPreparada.setInt(1, p.getIdproductoempresa());
-            int filasAfectadas = sentenciaPreparada.executeUpdate();
-            sentenciaPreparada.close();
-
-            conexión.close();
-
-            if(filasAfectadas > 0) {
-                return true;
-            }else {
-                return false;
-            }
-        }catch (SQLException e){
-            Log.i("SQL", "Error al borrar el producto publicado en la base de datos");
-            return false;
-        }
-
     }
 }
