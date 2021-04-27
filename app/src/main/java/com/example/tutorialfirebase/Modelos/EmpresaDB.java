@@ -25,7 +25,7 @@ public class EmpresaDB {
         try {
             Statement sentencia = conexión.createStatement();
             int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            String ordenSQL = "SELECT * FROM empresas LIMIT" + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL = "SELECT * FROM empresas LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
             while(resultado.next()) {
                 String cod_empr = resultado.getString("cod_empr");
@@ -47,6 +47,7 @@ public class EmpresaDB {
     }
 
     public static int obtenerCantidadEmpresas() {
+        Log.i("sql" , "llega aqui");
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if (conexión == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");

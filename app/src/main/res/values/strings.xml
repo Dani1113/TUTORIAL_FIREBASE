@@ -55,4 +55,21 @@
     <string name="galer_a_empresas">GALERÍA EMPRESAS</string>
     <string name="slideshow_empresas">SLIDESHOW EMPRESAS</string>
     <string name="ajustes">Ajustes</string>
+    <string name="descripcion_img_producto_publicado">descripcion_img_producto_publicado</string>
+    <string name="categoria">categoria</string>
+    <string name="marca">marca</string>
+    <string name="precio">precio</string>
+    <string name="stock">stock</string>
+    <string name="descripcion">descripcion</string>
+    <string name="todo3">todo3</string>
+    <string name="descripcion_img_empresa">descripcion_img_empresa</string>
+    <string name="cod_empresa">cod_empresa</string>
+    <string name="clave_empresa">clave_empresa</string>
+    <string name="datos_empresa">datos_empresa</string>
+    <string name="todo1">todo1</string>
+    <string name="hello_blank_fragment">hello_blank_fragment</string>
+    <string name="img_empresa">img_empresa</string>
+    <string name="img_producto_publicado">img_producto_publicado</string>
+
+
 </resources>
