@@ -3,8 +3,6 @@ package com.example.tutorialfirebase.Modelos;
 import android.util.Log;
 
 import com.example.tutorialfirebase.Clases.Empresa;
-import com.example.tutorialfirebase.Clases.Moda;
-import com.example.tutorialfirebase.Clases.Producto;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 
@@ -25,7 +23,7 @@ public class EmpresaDB {
         try {
             Statement sentencia = conexión.createStatement();
             int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            String ordenSQL = "SELECT * FROM empresas LIMIT" + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL = "SELECT * FROM empresas LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
             while(resultado.next()) {
                 String cod_empr = resultado.getString("cod_empr");

@@ -1,6 +1,7 @@
 package com.example.tutorialfirebase.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tutorialfirebase.Clases.ProductosPublicados;
+import com.example.tutorialfirebase.Modelos.ProductosPublicadosDB;
 import com.example.tutorialfirebase.R;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -31,5 +36,20 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ArrayList<ProductosPublicados> productosPublicados = ProductosPublicadosDB.obtenerProductosPublicados(0);
+
+        if(productosPublicados != null){
+            for (ProductosPublicados p: productosPublicados){
+                Log.i("consulta", p.toString());
+            }
+        }else{
+            System.out.println("Error");
+            Log.i("consulta", "error");
+        }
     }
 }
