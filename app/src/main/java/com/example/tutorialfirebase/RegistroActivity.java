@@ -78,10 +78,6 @@ public class RegistroActivity extends AppCompatActivity {
         validaciónRegistroUsuario("Usuarios");
     }
 
-    public void registrarEmpresa(View view) {
-        validaciónRegistroUsuario("Empresas");
-    }
-
     private void validaciónRegistroUsuario(String tipoUsuario) {
         String usuario = String.valueOf(edtREmail.getText());
         String contraseña = String.valueOf(edtRContraseña.getText());

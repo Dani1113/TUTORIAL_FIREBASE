@@ -18,12 +18,12 @@ public class BienvenidaActivity extends AppCompatActivity {
     }
 
     public void entrarALaApp(View view) {
-        Intent intent = new Intent(BienvenidaActivity.this, HomeActivity.class);
+        Intent intent = new Intent(BienvenidaActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
     public void inciarSesión(View view) {
-        Intent intent = new Intent(BienvenidaActivity.this, LoginActivity.class);
+        Intent intent = new Intent(BienvenidaActivity.this, EmpresaLoginActivity.class);
         startActivity(intent);
     }
 }

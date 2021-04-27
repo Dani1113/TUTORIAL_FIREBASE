@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Log.i("", "Nuevo usuario en firestore");
-                Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         }).addOnFailureListener(new OnFailureListener() {

@@ -9,21 +9,18 @@
 
     <Button
         android:id="@+id/btRRegistrarU"
-        android:layout_width="165dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:onClick="registrarUsuario"
         android:text="@string/confirmar_registro_de_usuario"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:backgroundTint="@color/amarillo"
         app:cornerRadius="20dip"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtRConfirmarContraseña"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/edtRConfirmarContraseña"
+        app:layout_constraintStart_toStartOf="@+id/edtRConfirmarContraseña"
+        app:layout_constraintTop_toBottomOf="@+id/edtRConfirmarContraseña" />
 
     <EditText
         android:id="@+id/edtRE"
@@ -86,24 +83,6 @@
         app:layout_constraintEnd_toEndOf="@+id/edtRContraseña"
         app:layout_constraintStart_toStartOf="@+id/edtRContraseña"
         app:layout_constraintTop_toBottomOf="@+id/edtRContraseña" />
-
-    <Button
-        android:id="@+id/btRRegistrarE"
-        android:layout_width="165dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/confirmar_registro_de_empresa"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:onClick="registrarEmpresa"
-        app:backgroundTint="@color/amarillo"
-        app:cornerRadius="20dip"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtRConfirmarContraseña"
-        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/edtRNombre"

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/fondo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmpresaRegistroActivity">
+
+    <EditText
+        android:id="@+id/edtRENombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:ems="10"
+        android:hint="Nombre de empresa"
+        android:inputType="textPersonName"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtREDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        android:hint="Direccion"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtRENombre"
+        app:layout_constraintStart_toStartOf="@+id/edtRENombre"
+        app:layout_constraintTop_toBottomOf="@+id/edtRENombre" />
+
+    <EditText
+        android:id="@+id/edtRECIF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="CIF"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtREDireccion"
+        app:layout_constraintStart_toStartOf="@+id/edtREDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/edtREDireccion" />
+
+    <EditText
+        android:id="@+id/edtRESector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Sector"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtREConfirmPass"
+        app:layout_constraintStart_toStartOf="@+id/edtREConfirmPass"
+        app:layout_constraintTop_toBottomOf="@+id/edtREConfirmPass" />
+
+    <EditText
+        android:id="@+id/edtREEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edtRECIF"
+        app:layout_constraintStart_toStartOf="@+id/edtRECIF"
+        app:layout_constraintTop_toBottomOf="@+id/edtRECIF" />
+
+    <EditText
+        android:id="@+id/edtREPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/contraseña"
+        android:inputType="textPassword"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/edtREEmail"
+        app:layout_constraintStart_toStartOf="@+id/edtREEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edtREEmail" />
+
+    <EditText
+        android:id="@+id/edtREConfirmPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/amarillo"
+        android:textSize="24sp"
+        android:hint="@string/confirmar_contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edtREPass"
+        app:layout_constraintStart_toStartOf="@+id/edtREPass"
+        app:layout_constraintTop_toBottomOf="@+id/edtREPass" />
+
+    <Button
+        android:id="@+id/btnRERegsitrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/registrarse"
+        android:textSize="24sp"
+        android:onClick="registrarEmpresa"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/amarillo"
+        app:cornerRadius="20dip"
+        app:layout_constraintEnd_toEndOf="@+id/edtRESector"
+        app:layout_constraintStart_toStartOf="@+id/edtRESector"
+        app:layout_constraintTop_toBottomOf="@+id/edtRESector" />
+</androidx.constraintlayout.widget.ConstraintLayout>
