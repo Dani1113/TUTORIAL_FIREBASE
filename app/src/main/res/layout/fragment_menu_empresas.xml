@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MenuEmpresasFragment">
+
+    <EditText
+        android:id="@+id/buscar_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="Buscar..."
+        android:layout_toStartOf="@+id/btn_carrito_compra"/>
+
+    <ImageButton
+        android:id="@+id/btn_carrito_compra"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/todo1"
+        android:scaleType="centerInside"
+        android:src="@drawable/carrito"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
