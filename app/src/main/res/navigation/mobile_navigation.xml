@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.example.tutorialfirebase.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_fragment_producto_publicado"
+            app:destination="@id/fragment_producto_publicado" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,4 +26,13 @@
         android:name="com.example.tutorialfirebase.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/fragment_producto_publicado"
+        android:name="com.example.tutorialfirebase.fragment_producto_publicado"
+        android:label="fragment_producto_publicado"
+        tools:layout="@layout/fragment_producto_publicado" >
+        <action
+            android:id="@+id/action_fragment_producto_publicado_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>
