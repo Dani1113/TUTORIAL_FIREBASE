@@ -70,6 +70,7 @@
     <string name="hello_blank_fragment">hello_blank_fragment</string>
     <string name="img_empresa">img_empresa</string>
     <string name="img_producto_publicado">img_producto_publicado</string>
+    <string name="aqui_van_los_productos_de_una_empresa">aqui van los productos de una empresa</string>
 
 
 </resources>

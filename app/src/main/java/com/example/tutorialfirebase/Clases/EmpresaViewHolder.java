@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tutorialfirebase.Utilidades.ImagenesBlobBitmap;
 
@@ -47,6 +50,9 @@ public class EmpresaViewHolder extends RecyclerView.ViewHolder implements View.O
         lcAdapter.notifyDataSetChanged();
         Intent intent = new Intent(lcAdapter.getC(), MostrarDetalleEmpresaActivity.class);
         Empresa empresa_sin_imagen = new Empresa(empresa.getCod_empresa(), empresa.getClave_empr(), empresa.getDatos_empr());//, empresa.getIdFoto());
+        NavHostFragment navHostFragment = (NavHostFragment)((FragmentActivity)lcAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.navegador_menu);
+        NavController navController1 = navHostFragment.getNavController();
+        navController1.navigate(R.id.action_ir_a_productos_empresa);
         //intent.putExtra(EXTRA_OBJETO_EMPRESA, (Parcelable) empresa_sin_imagen);
        // Bitmap foto_empresa_png = empresa.getIdFoto();
        /* if(foto_empresa_png != null){

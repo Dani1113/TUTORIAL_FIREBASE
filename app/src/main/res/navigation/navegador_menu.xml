@@ -13,5 +13,17 @@
         <action
             android:id="@+id/action_ir_a_empresas"
             app:destination="@id/fragment_empresas" />
+        <action
+            android:id="@+id/action_ir_a_productos_empresa"
+            app:destination="@id/detalle_productos_empresa" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalle_productos_empresa"
+        android:name="com.example.tutorialfirebase.detalle_productos_empresa"
+        android:label="fragment_detalle_productos_empresa"
+        tools:layout="@layout/fragment_detalle_productos_empresa" >
+        <action
+            android:id="@+id/action_ir_a_empresas"
+            app:destination="@id/fragment_empresas" />
     </fragment>
 </navigation>
