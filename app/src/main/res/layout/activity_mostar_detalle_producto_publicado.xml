@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MostarDetalleProductoPublicadoActivity">
+
+    <ImageView
+        android:id="@+id/img_detalle_producto_publicado"
+        android:layout_width="135dp"
+        android:layout_height="119dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/descripcion_img_producto_publicado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/producto" />
+
+    <TextView
+        android:id="@+id/txt_detalle_categoria_producto_publicado"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/categoria"
+        android:textSize="@dimen/tam_titulo"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_detalle_producto_publicado" />
+
+    <TextView
+        android:id="@+id/txt_detalle_marca_producto_publicado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/marca"
+        android:textSize="@dimen/tam_letra2"
+        app:layout_constraintEnd_toEndOf="@+id/txt_detalle_categoria_producto_publicado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_detalle_categoria_producto_publicado"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detalle_categoria_producto_publicado" />
+
+    <TextView
+        android:id="@+id/txt_detalle_precio_producto_publicado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/precio"
+        android:textSize="@dimen/tam_letra2"
+        app:layout_constraintEnd_toEndOf="@+id/txt_detalle_marca_producto_publicado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_detalle_marca_producto_publicado"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detalle_marca_producto_publicado" />
+
+    <TextView
+        android:id="@+id/txt_detalle_stock_producto_publicado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/stock"
+        android:textSize="@dimen/tam_letra2"
+        app:layout_constraintEnd_toEndOf="@+id/txt_detalle_precio_producto_publicado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_detalle_precio_producto_publicado"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detalle_precio_producto_publicado" />
+
+    <TextView
+        android:id="@+id/txt_detalle_descripcion_producto_publicado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/descripcion"
+        android:textSize="@dimen/tam_letra2"
+        app:layout_constraintEnd_toEndOf="@+id/txt_detalle_stock_producto_publicado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txt_detalle_stock_producto_publicado"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detalle_stock_producto_publicado" />
+
+    <ImageView
+        android:id="@+id/img_atras_detalle_provincia"
+        android:layout_width="@dimen/ancho1_boton"
+        android:layout_height="@dimen/alto1_boton"
+        android:layout_marginTop="16dp"
+        android:onClick="atras_detalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_detalle_descripcion_producto_publicado"
+        app:srcCompat="@drawable/atras1"
+        android:contentDescription="@string/todo3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
