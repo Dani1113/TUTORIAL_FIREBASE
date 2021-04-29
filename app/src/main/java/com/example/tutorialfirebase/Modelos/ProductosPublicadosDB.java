@@ -242,7 +242,7 @@ public class ProductosPublicadosDB {
     }
 
 
-    public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int pagina, String cod_empr) {
+    /*public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int pagina, String cod_empr) {
         ArrayList<ProductosPublicados> productosPublicadosDevuelto = null;
         FutureTask tarea = new FutureTask(new TareaObtenerProductoPublicadoPorEmpresa(pagina, cod_empr));
         ExecutorService es = Executors.newSingleThreadExecutor();
@@ -263,5 +263,5 @@ public class ProductosPublicadosDB {
             e.printStackTrace();
         }
         return productosPublicadosDevuelto;
-    }
+    }*/
 }

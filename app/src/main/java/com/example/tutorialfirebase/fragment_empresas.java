@@ -63,14 +63,15 @@ public class fragment_empresas extends Fragment {
 
         /*---COGER ELEMENTOS DE LA BASE DE DATOS DE FIREBASE---*/
         db = FirebaseFirestore.getInstance();
-        mRecyclerView = vista.findViewById(R.id.rv_empresas);
-        mAdapter = new ListaEmpresasAdapter(getActivity(), empresas);
-        mRecyclerView.setAdapter(mAdapter);
+
+        ArrayList<InfoEmpresa> infoEmpresas = new ArrayList<>();
 
         db.collection("businessdata").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("illo","Coge los datos de businessdata");
                 if (task.isSuccessful()){
+                    Log.i("illo","Tiene exito coger datos");
                     for (QueryDocumentSnapshot document : task.getResult()){
                         DocumentReference documentReference = db.collection("businessdata").document(document.getId()).collection("editinfoempresa").document("infoEmpresa");
 
@@ -78,10 +79,13 @@ public class fragment_empresas extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()){
+                                    Log.i("illo","Tiene exito coger el documento infoEmpresa");
                                     DocumentSnapshot info = task.getResult();
                                     if (info.exists()){
                                         infoEmpresa = info.toObject(InfoEmpresa.class);
-                                        mAdapter.addEmpresa(infoEmpresa);
+                                        infoEmpresas.add(infoEmpresa);
+                                        Log.i("illo","Añade empresas al ArrayList");
+                                        //mAdapter.addEmpresa(infoEmpresa);
                                     }
                                 }
                             }
@@ -90,6 +94,10 @@ public class fragment_empresas extends Fragment {
                 }
             }
         });
+
+        mRecyclerView = vista.findViewById(R.id.rv_empresas);
+        mAdapter = new ListaEmpresasAdapter(getActivity(),infoEmpresas);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -114,12 +122,12 @@ public class fragment_empresas extends Fragment {
 
         pagina_actual++;
         if(empresas != null) {
-            Log.i("sql", "pagina actual -> " + String.valueOf(pagina_actual));
+            /*Log.i("sql", "pagina actual -> " + String.valueOf(pagina_actual));
             Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas.size()));
             mRecyclerView = vista.findViewById(R.id.rv_empresas);
             mAdapter = new ListaEmpresasAdapter(getActivity(), empresas);
             mRecyclerView.setAdapter(mAdapter);
-            int orientation = 1;
+            int orientation = 1;*/
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             } else {
