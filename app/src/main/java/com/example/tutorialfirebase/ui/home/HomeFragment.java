@@ -26,6 +26,7 @@ import com.example.tutorialfirebase.R;
                                  ViewGroup container, Bundle savedInstanceState) {
 
             View root = inflater.inflate(R.layout.fragment_home, container, false);
+
          //   NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
            // NavController navController = navHostFragment.getNavController();
             //avController.navigate(R.id.fragment_empresas;

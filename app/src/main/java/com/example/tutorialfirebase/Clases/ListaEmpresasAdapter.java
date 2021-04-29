@@ -2,6 +2,7 @@ package com.example.tutorialfirebase.Clases;
 
 import android.content.Context;
 import android.icu.text.IDNA;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tutorialfirebase.R;
 
 import java.util.ArrayList;
@@ -54,9 +56,16 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
         * Direccion
         */
         holder.txt_rv_nombre_empresa.setText(String.valueOf("cod_empresa : " + empresaActual.getNombre()));
+
         holder.txt_rv_sector_empresa.setText(String.valueOf("clave_empr : " + empresaActual.getSector()));
         holder.txt_rv_resumen_empresa.setText(String.valueOf("datos_empr : " + empresaActual.getResumen()));
         holder.txt_rv_direccion_empresa.setText("Dirección: "+ empresaActual.getDireccion());
+        if (listaInfoEmpresa.get(position).getLogoURL().isEmpty()){
+            holder.img_empresa.setImageResource(R.mipmap.ic_launcher);
+        }else{
+            Glide.with(c).load(listaInfoEmpresa.get(position).getLogoURL()).into(holder.img_empresa);
+        }
+
       /*if(empresaActual.getLogoURL() != null){
             //holder.img_empresa.setImageBitmap(empresaActual.getIdFoto());
         }
@@ -67,8 +76,8 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     @Override
     public int getItemCount() {
-        if (listaEmpresas != null) {
-            return listaEmpresas.size();
+        if (listaInfoEmpresa != null) {
+            return listaInfoEmpresa.size();
         } else {
             return 0;
         }
@@ -82,12 +91,12 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
         this.c = c;
     }
 
-    public ArrayList<Empresa> getListaEmpresas() {
-        return listaEmpresas;
+    public ArrayList<InfoEmpresa> getListaEmpresas() {
+        return listaInfoEmpresa;
     }
 
-    public void setListaEmpresas(ArrayList<Empresa> listaEmpresas) {
-        this.listaEmpresas = listaEmpresas;
+    public void setListaEmpresas(ArrayList<InfoEmpresa> listaEmpresas) {
+        this.listaInfoEmpresa = listaEmpresas;
     }
 
     public ArrayList<InfoEmpresa> getListaInfoEmpresas(){return listaInfoEmpresa;}

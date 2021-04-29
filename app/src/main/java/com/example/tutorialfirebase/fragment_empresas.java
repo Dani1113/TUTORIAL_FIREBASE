@@ -54,17 +54,25 @@ public class fragment_empresas extends Fragment {
                              Bundle savedInstanceState) {
         View vista =  inflater.inflate(R.layout.fragment_empresas, container, false);
         Log.i("sql", String.valueOf(total_registros));
-        total_registros = EmpresaController.obtenerCantidadEmpresas();
-        Log.i("sql", String.valueOf(total_registros));
-        Log.i("sql", "total registros -> " + String.valueOf(total_registros));
+        //total_registros = EmpresaController.obtenerCantidadEmpresas();
+        //Log.i("sql", String.valueOf(total_registros));
+        //Log.i("sql", "total registros -> " + String.valueOf(total_registros));
 
-        total_paginas = (total_registros / ConfiguracionesGenerales.ELEMENTOS_POR_PAGINA) +  1;
-        Log.i("sql", "total paginas -> " + String.valueOf(total_paginas));
+        //total_paginas = (total_registros / ConfiguracionesGenerales.ELEMENTOS_POR_PAGINA) +  1;
+        //Log.i("sql", "total paginas -> " + String.valueOf(total_paginas));
 
         /*---COGER ELEMENTOS DE LA BASE DE DATOS DE FIREBASE---*/
         db = FirebaseFirestore.getInstance();
 
         ArrayList<InfoEmpresa> infoEmpresas = new ArrayList<>();
+        mRecyclerView = vista.findViewById(R.id.rv_empresas);
+        mAdapter = new ListaEmpresasAdapter(getActivity(),infoEmpresas);
+        LinearLayoutManager l = new LinearLayoutManager(getActivity());
+
+        mRecyclerView.setLayoutManager(l);
+
+        mRecyclerView.setAdapter(mAdapter);
+
 
         db.collection("businessdata").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -83,7 +91,7 @@ public class fragment_empresas extends Fragment {
                                     DocumentSnapshot info = task.getResult();
                                     if (info.exists()){
                                         infoEmpresa = info.toObject(InfoEmpresa.class);
-                                        infoEmpresas.add(infoEmpresa);
+                                        mAdapter.addEmpresa(infoEmpresa);
                                         Log.i("illo","Añade empresas al ArrayList");
                                         //mAdapter.addEmpresa(infoEmpresa);
                                     }
@@ -95,9 +103,7 @@ public class fragment_empresas extends Fragment {
             }
         });
 
-        mRecyclerView = vista.findViewById(R.id.rv_empresas);
-        mAdapter = new ListaEmpresasAdapter(getActivity(),infoEmpresas);
-        mRecyclerView.setAdapter(mAdapter);
+
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -116,71 +122,73 @@ public class fragment_empresas extends Fragment {
 
         /*---FIN COGER ELEMENTOS FIREBASE---*/
 
-        pagina_actual=0;
-        num_columnas_landscape = 2;
-        empresas = EmpresaController.obtenerEmpresas(pagina_actual);
 
-        pagina_actual++;
-        if(empresas != null) {
-            /*Log.i("sql", "pagina actual -> " + String.valueOf(pagina_actual));
-            Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas.size()));
-            mRecyclerView = vista.findViewById(R.id.rv_empresas);
-            mAdapter = new ListaEmpresasAdapter(getActivity(), empresas);
-            mRecyclerView.setAdapter(mAdapter);
-            int orientation = 1;*/
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            } else {
-                mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), ConfiguracionesGenerales.LANDSCAPE_NUM_COLUMNAS));
-            }
-
-            // paginacion
-            mRecyclerView.addOnScrollListener(new PaginationListener((LinearLayoutManager) mRecyclerView.getLayoutManager()) {
-                private int empresas_leidas = 0;
-                @Override
-                protected void loadMoreItems() {
-
-                    int total_registros_leidos = mRecyclerView.getLayoutManager().getItemCount();
-                    if (total_registros_leidos < total_registros) {
-                        ArrayList<Empresa> nuevasEmpresas = EmpresaController.obtenerEmpresas(pagina_actual);
-                        empresas_leidas = nuevasEmpresas.size();
-                        pagina_actual++;
-
-                        Boolean resultado = mRecyclerView.post(new Runnable()
-                        {
-                            @Override
-                            public void run() {
-                                ListaEmpresasAdapter mAdapter1 =(ListaEmpresasAdapter) mRecyclerView.getAdapter();
-                                ArrayList<Empresa> empresas_rv = mAdapter1.getListaEmpresas();
-                                empresas_rv.addAll(nuevasEmpresas);
-                                mRecyclerView.getAdapter().notifyDataSetChanged();
-                            }});
-                        Log.i("sql", "siguiente pagina -> " + String.valueOf(pagina_actual));
-                        Log.i("sql", "total registros -> " + String.valueOf(total_registros));
-                        Log.i("sql", "total registros leidos -> " + String.valueOf(total_registros_leidos));
-                        Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas_leidas));
-
-                    }
-                    else{
-                        empresas_leidas = 0;
-                    }
-                }
-                @Override
-                public boolean isLastPage() {
-                    if(pagina_actual > total_paginas -1 ) {
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-            });
-        }
-        else{
-            mostrarToast("no se pudo establecer la conexion con la base de datos");
-            Log.i("sql", "error en el sql");
-        }
+//        pagina_actual=0;
+//        num_columnas_landscape = 2;
+//        empresas = EmpresaController.obtenerEmpresas(pagina_actual);
+//
+//        pagina_actual++;
+//        if(empresas != null) {
+//            /*Log.i("sql", "pagina actual -> " + String.valueOf(pagina_actual));
+//            Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas.size()));
+//            mRecyclerView = vista.findViewById(R.id.rv_empresas);
+//            mAdapter = new ListaEmpresasAdapter(getActivity(), empresas);
+//            mRecyclerView.setAdapter(mAdapter);
+//            int orientation = 1;*/
+//            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//            } else {
+//                mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), ConfiguracionesGenerales.LANDSCAPE_NUM_COLUMNAS));
+//            }
+//
+//            // paginacion
+//            mRecyclerView.addOnScrollListener(new PaginationListener((LinearLayoutManager) mRecyclerView.getLayoutManager()) {
+//                private int empresas_leidas = 0;
+//                @Override
+//                protected void loadMoreItems() {
+//
+//                    int total_registros_leidos = mRecyclerView.getLayoutManager().getItemCount();
+//                    if (total_registros_leidos < total_registros) {
+//                        ArrayList<Empresa> nuevasEmpresas = EmpresaController.obtenerEmpresas(pagina_actual);
+//                        empresas_leidas = nuevasEmpresas.size();
+//                        pagina_actual++;
+//
+//                        Boolean resultado = mRecyclerView.post(new Runnable()
+//                        {
+//                            @Override
+//                            public void run() {
+//                                ListaEmpresasAdapter mAdapter1 =(ListaEmpresasAdapter) mRecyclerView.getAdapter();
+//                                ArrayList<Empresa> empresas_rv = mAdapter1.getListaEmpresas();
+//                                empresas_rv.addAll(nuevasEmpresas);
+//                                mRecyclerView.getAdapter().notifyDataSetChanged();
+//                            }});
+//                        Log.i("sql", "siguiente pagina -> " + String.valueOf(pagina_actual));
+//                        Log.i("sql", "total registros -> " + String.valueOf(total_registros));
+//                        Log.i("sql", "total registros leidos -> " + String.valueOf(total_registros_leidos));
+//                        Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas_leidas));
+//
+//                    }
+//                    else{
+//                        empresas_leidas = 0;
+//                    }
+//                }
+//                @Override
+//                public boolean isLastPage() {
+//                    if(pagina_actual > total_paginas -1 ) {
+//                        return true;
+//                    }
+//                    else{
+//                        return false;
+//                    }
+//                }
+//            });
+//        }
+//        else{
+//            mostrarToast("no se pudo establecer la conexion con la base de datos");
+//            Log.i("sql", "error en el sql");
+//        }
         return vista;
+
 }
     private void mostrarToast(String texto) {
         Toast.makeText(getActivity(),texto, Toast.LENGTH_SHORT).show();
