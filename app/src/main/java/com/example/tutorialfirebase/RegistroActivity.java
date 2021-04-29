@@ -138,10 +138,23 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                Log.i("", "Nuevo usuario en firestore");
-                firebaseAuth.signOut();
-                Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Map<String, Object> data = new HashMap<>();
+                db.collection("businessdata")
+                        .document(firebaseAuth.getCurrentUser().getEmail())
+                        .set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.i("", "Nuevo usuario en firestore");
+                        firebaseAuth.signOut();
+                        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -152,5 +165,7 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
+    private void createDocument(){
 
+    }
 }

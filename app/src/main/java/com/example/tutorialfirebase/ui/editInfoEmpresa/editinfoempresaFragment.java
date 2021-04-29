@@ -161,7 +161,7 @@ public class editinfoempresaFragment extends Fragment {
                     if(document.exists()){
 
                         infoEmpresa = document.toObject((InfoEmpresa.class));
-                        Glide.with(editinfoempresaFragment.this).load(infoEmpresa.getLogoURL());
+                        Glide.with(editinfoempresaFragment.this).load(infoEmpresa.getLogoURL()).into(logoEmpresa);
                         nombreEmpresa.setText(infoEmpresa.getNombre());
                         localizacionEmpresa.setText(infoEmpresa.getDireccion());
                         cifEmpresa.setText(infoEmpresa.getCif());
