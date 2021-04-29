@@ -1,5 +1,4 @@
 package com.example.tutorialfirebase.Clases;
-
 import java.io.Serializable;
 
 public class InfoEmpresa implements Serializable {
@@ -8,13 +7,18 @@ public class InfoEmpresa implements Serializable {
     private String sector;
     private String resumen;
     private String direccion;
+    private String cif;
+    private String cod_empresa;
 
-    public InfoEmpresa(String logoURL, String nombre, String sector, String resumen, String direccion) {
+
+    public InfoEmpresa(String logoURL, String nombre, String sector, String resumen, String direccion, String cif, String cod_empresa) {
         this.logoURL = logoURL;
         this.nombre = nombre;
         this.sector = sector;
         this.resumen = resumen;
         this.direccion = direccion;
+        this.cif = cif;
+        this.cod_empresa = cod_empresa;
     }
 
     public InfoEmpresa() {
@@ -23,6 +27,8 @@ public class InfoEmpresa implements Serializable {
         this.sector = "sector";
         this.resumen = "resumen";
         this.direccion = "direccion";
+        this.cif = "cif";
+        this.cod_empresa = "cod_empresa";
     }
 
     public String getLogoURL() {
@@ -65,6 +71,22 @@ public class InfoEmpresa implements Serializable {
         this.direccion = direccion;
     }
 
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+
+    public String getCod_empresa() {
+        return cod_empresa;
+    }
+
+    public void setCod_empresa(String cod_empresa) {
+        this.cod_empresa = cod_empresa;
+    }
+
     @Override
     public String toString() {
         return "InfoEmpresa{" +
@@ -73,6 +95,8 @@ public class InfoEmpresa implements Serializable {
                 ", sector='" + sector + '\'' +
                 ", resumen='" + resumen + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", cif='" + cif + '\'' +
+                ", cod_empresa='" + cod_empresa + '\'' +
                 '}';
     }
 }

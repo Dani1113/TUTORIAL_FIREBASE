@@ -16,6 +16,7 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     private Context c;
     private ArrayList<Empresa> listaEmpresas;
+    private ArrayList<InfoEmpresa> listaInfoEmpresa;
     private LayoutInflater mInflater;
     private int pagina;
 
@@ -30,6 +31,7 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
     public ListaEmpresasAdapter(Context c, ArrayList<Empresa> listaempresas) {
         this.c = c;
         this.listaEmpresas = listaempresas;
+        listaInfoEmpresa = new ArrayList<>();
         mInflater = LayoutInflater.from(c);
         this.pagina = 0;
     }
@@ -78,6 +80,16 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     public void setListaEmpresas(ArrayList<Empresa> listaEmpresas) {
         this.listaEmpresas = listaEmpresas;
+    }
+
+    public void addEmpresa(InfoEmpresa b){
+        listaInfoEmpresa.add(b);
+        notifyItemInserted(listaInfoEmpresa.size());
+    }
+
+    public InfoEmpresa getEmpresa(int i){
+        InfoEmpresa infoEmpresa = listaInfoEmpresa.get(i);
+        return infoEmpresa;
     }
 
 }
