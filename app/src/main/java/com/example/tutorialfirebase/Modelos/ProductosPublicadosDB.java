@@ -9,6 +9,7 @@ import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -121,8 +122,10 @@ public class ProductosPublicadosDB {
 
             Statement sentencia2 = conexión.createStatement();
             int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            String ordenSQL2 = "SELECT p.cod_producto, p.cod_QR, p.marca, p.modelo, p.descripcion, p.idfoto, m.talla, m.color, m.material, m.sexo, m.categoria_moda, pp.idproductoempresa, pp.cantidad, pp.precioventa, pp.habilitado, pp.archivado FROM productos p INNER JOIN moda m INNER JOIN productospublicados pp INNER JOIN empresas e ON (m.cod_producto = p.cod_producto AND p.cod_producto = pp.cod_producto AND pp.cod_empresa = e.empr) WHERE pp.habilitado = 1 AND pp.archivado = 0 AND e.cod_empr = " + cod_empresa + " LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
-            ResultSet resultado2 = sentencia2.executeQuery(ordenSQL2);
+            String ordenSQL2 = "SELECT p.cod_producto, p.cod_QR, p.marca, p.modelo, p.descripcion, p.idfoto, m.talla, m.color, m.material, m.sexo, m.categoria_moda, pp.idproductoempresa, pp.cantidad, pp.precioventa, pp.habilitado, pp.archivado FROM productos p INNER JOIN moda m INNER JOIN productospublicados pp INNER JOIN empresas e ON (m.cod_producto = p.cod_producto AND p.cod_producto = pp.cod_producto AND pp.cod_empresa = e.empr) WHERE pp.habilitado = 1 AND pp.archivado = 0 AND e.cod_empr = ? LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            PreparedStatement sentenciaPreparada = conexión.prepareStatement(ordenSQL2);
+            sentenciaPreparada.setString(1, cod_empresa);
+            ResultSet resultado2 = sentenciaPreparada.executeQuery();
             while (resultado2.next()) {
                 String cod_producto = resultado2.getString("cod_producto");
                 Log.i("sql", "prueba cod");
