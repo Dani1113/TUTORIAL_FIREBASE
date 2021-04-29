@@ -4,9 +4,10 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ProductosPublicados {
+public class ProductosPublicados implements Serializable {
     private int idproductoempresa;
     private int cantidad;
     private double precioventa;
@@ -24,6 +25,7 @@ public class ProductosPublicados {
         this.p = p;
         this.e = e;
     }
+
 
     public int getIdproductoempresa() {
         return idproductoempresa;

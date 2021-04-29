@@ -2,6 +2,7 @@ package com.example.tutorialfirebase.Clases;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
@@ -48,11 +49,17 @@ public class EmpresaViewHolder extends RecyclerView.ViewHolder implements View.O
         Empresa empresa;
         empresa = this.lcAdapter.getListaEmpresas().get(mPosition);
         lcAdapter.notifyDataSetChanged();
-        Intent intent = new Intent(lcAdapter.getC(), MostrarDetalleEmpresaActivity.class);
+
         Empresa empresa_sin_imagen = new Empresa(empresa.getCod_empresa(), empresa.getClave_empr(), empresa.getDatos_empr());//, empresa.getIdFoto());
-        NavHostFragment navHostFragment = (NavHostFragment)((FragmentActivity)lcAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.navegador_menu);
-        NavController navController1 = navHostFragment.getNavController();
-        navController1.navigate(R.id.action_ir_a_productos_empresa);
+        NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity)lcAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.nav_host_contenedor_home);
+        NavController navController = navHostFragment.getNavController();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_OBJETO_EMPRESA, empresa_sin_imagen);
+        navController.navigate(R.id.action_ir_a_productos_publicados, bundle);
+
+       // NavHostFragment navHostFragment = (NavHostFragment)((FragmentActivity)lcAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.navegador_menu);
+        //NavController navController1 = navHostFragment.getNavController();
+       // navController1.navigate(R.id.action_ir_a_productos_empresa);
         //intent.putExtra(EXTRA_OBJETO_EMPRESA, (Parcelable) empresa_sin_imagen);
        // Bitmap foto_empresa_png = empresa.getIdFoto();
        /* if(foto_empresa_png != null){
@@ -64,7 +71,7 @@ public class EmpresaViewHolder extends RecyclerView.ViewHolder implements View.O
             intent.putExtra(EXTRA_IMAGEN_EMPRESA, byteArrayfoto);
         }
         */
-        lcAdapter.getC().startActivity(intent);
+
     }
 }
 
