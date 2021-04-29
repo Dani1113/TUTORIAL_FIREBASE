@@ -45,6 +45,7 @@ public class EmpresaDB {
     }
 
     public static int obtenerCantidadEmpresas() {
+        Log.i("sql" , "llega aqui");
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if (conexión == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");

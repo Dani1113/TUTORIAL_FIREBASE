@@ -7,12 +7,18 @@ import com.example.tutorialfirebase.Clases.Moda;
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
+import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaObtenerProductoPublicadoPorEmpresa;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class ProductosPublicadosDB {
     public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página) {
@@ -51,14 +57,14 @@ public class ProductosPublicadosDB {
                 String cod_QR = resultado2.getString("cod_QR");
                 String marca = resultado2.getString("marca");
                 String modelo = resultado2.getString("modelo");
-                String descripción = resultado2.getString("descripcion");
+                String descripcion = resultado2.getString("descripcion");
                 int id_foto = resultado2.getInt("idfoto");
                 String talla = resultado2.getString("talla");
                 String color = resultado2.getString("color");
                 String material = resultado2.getString("material");
                 String sexo = resultado2.getString("sexo");
                 String categoria_moda = resultado2.getString("categoria_moda");
-                Moda moda = new Moda(cod_producto, cod_QR, marca, modelo, descripción, id_foto, talla, color, material, sexo, categoria_moda);
+                Moda moda = new Moda(cod_producto, cod_QR, marca, modelo, descripcion, id_foto, talla, color, material, sexo, categoria_moda);
 
                 int idproductoempresa = resultado2.getInt("idproductoempresa");
                 int cantidad = resultado2.getInt("cantidad");
@@ -209,14 +215,15 @@ public class ProductosPublicadosDB {
     */
 
     public static int obtenerCantidadProductosPublicados() {
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if (conexion == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");
             return 0;
         }
         int cantidadProductosPublicados = 0;
         try {
-            Statement sentencia = conexión.createStatement();
+            assert conexion != null;
+            Statement sentencia = conexion.createStatement();
             String ordenSQL = "SELECT count(*) as cantidad FROM productospublicados";
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
             while (resultado.next()) {
@@ -225,12 +232,36 @@ public class ProductosPublicadosDB {
             resultado.close();
             sentencia.close();
 
-            conexión.close();
+            conexion.close();
 
             return cantidadProductosPublicados;
         } catch (SQLException e) {
             Log.i("SQL", "Error al devolver el número de productos publicados de la base de datos");
             return 0;
         }
+    }
+
+
+    public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int pagina, String cod_empr) {
+        ArrayList<ProductosPublicados> productosPublicadosDevuelto = null;
+        FutureTask tarea = new FutureTask(new TareaObtenerProductoPublicadoPorEmpresa(pagina, cod_empr));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(tarea);
+        try {
+            productosPublicadosDevuelto = (ArrayList<ProductosPublicados>) tarea.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return productosPublicadosDevuelto;
     }
 }

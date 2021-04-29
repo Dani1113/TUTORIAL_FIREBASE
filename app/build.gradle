@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation files('libs/mysql-connector-java-5.1.49.jar')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Para corregir el error de compilacion 'com.android.tools.r8.utils.b: Cannot fit requested classes in a single dex file (# methods: 107455 > 65536)'
 
