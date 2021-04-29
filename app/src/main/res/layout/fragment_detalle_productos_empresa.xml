@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".detalle_productos_empresa">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_productos_empresa"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/aqui_van_los_productos_de_una_empresa" />
+        android:layout_height="350dp"
+        android:layout_marginStart="@dimen/margen1"
+        android:layout_marginLeft="@dimen/margen1"
+        android:layout_marginTop="60sp"
+        android:layout_marginEnd="@dimen/margen1"
+        android:layout_marginRight="@dimen/margen1" />
 
 </FrameLayout>

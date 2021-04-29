@@ -4,9 +4,10 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Empresa {
+public class Empresa implements Serializable {
     private String cod_empresa;
     private String clave_empr;
     private String datos_empr;
