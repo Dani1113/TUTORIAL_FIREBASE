@@ -22,4 +22,9 @@
         android:name="com.example.tutorialfirebase.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_infoempresa"
+        android:name="com.example.tutorialfirebase.ui.editInfoEmpresa.editinfoempresaFragment"
+        android:label="fragment_editinfoempresa"
+        tools:layout="@layout/fragment_editinfoempresa" />
 </navigation>
