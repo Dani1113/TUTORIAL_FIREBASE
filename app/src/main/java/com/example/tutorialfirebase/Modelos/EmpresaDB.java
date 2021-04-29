@@ -3,8 +3,6 @@ package com.example.tutorialfirebase.Modelos;
 import android.util.Log;
 
 import com.example.tutorialfirebase.Clases.Empresa;
-import com.example.tutorialfirebase.Clases.Moda;
-import com.example.tutorialfirebase.Clases.Producto;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 

@@ -1,6 +1,8 @@
 package com.example.tutorialfirebase.Clases;
 
 import android.content.Context;
+import android.icu.text.IDNA;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tutorialfirebase.R;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     private Context c;
     private ArrayList<Empresa> listaEmpresas;
+    private ArrayList<InfoEmpresa> listaInfoEmpresa;
     private LayoutInflater mInflater;
     private int pagina;
 
@@ -27,9 +31,9 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
         this.pagina = pagina;
     }
 
-    public ListaEmpresasAdapter(Context c, ArrayList<Empresa> listaempresas) {
+    public ListaEmpresasAdapter(Context c, ArrayList<InfoEmpresa> listaInfoEmpresas) {
         this.c = c;
-        this.listaEmpresas = listaempresas;
+        this.listaInfoEmpresa = listaInfoEmpresas;
         mInflater = LayoutInflater.from(c);
         this.pagina = 0;
     }
@@ -43,12 +47,27 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull EmpresaViewHolder holder, int position) {
-        Empresa empresaActual = listaEmpresas.get(position);
-        holder.txt_rv_cod_empresa.setText(String.valueOf("cod_empresa : " + empresaActual.getCod_empresa()));
-        holder.txt_rv_clave_empresa.setText(String.valueOf("clave_empr : " + empresaActual.getClave_empr()));
-        holder.txt_rv_datos_empresa.setText(String.valueOf("datos_empr : " + empresaActual.getDatos_empr()));
-     /* if(empresaActual.getIdFoto() != null){
-            holder.img_empresa.setImageBitmap(empresaActual.getIdFoto());
+        InfoEmpresa empresaActual = listaInfoEmpresa.get(position);
+        /*
+        * CircleImageView
+        * Nombre
+        * Sector
+        * Resumen
+        * Direccion
+        */
+        holder.txt_rv_nombre_empresa.setText(String.valueOf("cod_empresa : " + empresaActual.getNombre()));
+
+        holder.txt_rv_sector_empresa.setText(String.valueOf("clave_empr : " + empresaActual.getSector()));
+        holder.txt_rv_resumen_empresa.setText(String.valueOf("datos_empr : " + empresaActual.getResumen()));
+        holder.txt_rv_direccion_empresa.setText("Dirección: "+ empresaActual.getDireccion());
+        if (listaInfoEmpresa.get(position).getLogoURL().isEmpty()){
+            holder.img_empresa.setImageResource(R.mipmap.ic_launcher);
+        }else{
+            Glide.with(c).load(listaInfoEmpresa.get(position).getLogoURL()).into(holder.img_empresa);
+        }
+
+      /*if(empresaActual.getLogoURL() != null){
+            //holder.img_empresa.setImageBitmap(empresaActual.getIdFoto());
         }
         else{
             holder.img_empresa.setImageResource(R.drawable.empresa);
@@ -57,8 +76,8 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
 
     @Override
     public int getItemCount() {
-        if (listaEmpresas != null) {
-            return listaEmpresas.size();
+        if (listaInfoEmpresa != null) {
+            return listaInfoEmpresa.size();
         } else {
             return 0;
         }
@@ -72,12 +91,24 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
         this.c = c;
     }
 
-    public ArrayList<Empresa> getListaEmpresas() {
-        return listaEmpresas;
+    public ArrayList<InfoEmpresa> getListaEmpresas() {
+        return listaInfoEmpresa;
     }
 
-    public void setListaEmpresas(ArrayList<Empresa> listaEmpresas) {
-        this.listaEmpresas = listaEmpresas;
+    public void setListaEmpresas(ArrayList<InfoEmpresa> listaEmpresas) {
+        this.listaInfoEmpresa = listaEmpresas;
+    }
+
+    public ArrayList<InfoEmpresa> getListaInfoEmpresas(){return listaInfoEmpresa;}
+
+    public void addEmpresa(InfoEmpresa b){
+        listaInfoEmpresa.add(b);
+        notifyItemInserted(listaInfoEmpresa.size());
+    }
+
+    public InfoEmpresa getEmpresa(int i){
+        InfoEmpresa infoEmpresa = listaInfoEmpresa.get(i);
+        return infoEmpresa;
     }
 
 }

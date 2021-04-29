@@ -149,6 +149,22 @@ public class EmpresaRegistroActivity extends AppCompatActivity {
         db.collection("Empresas").document(firebaseAuth.getCurrentUser().getUid()).set(empresa).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                createDocument();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("Firestore", "Error al añadir el usuario en firestore", e);
+            }
+        });
+    }
+    private void createDocument(){
+        Map<String, Object> data = new HashMap<>();
+        db.collection("businessdata")
+                .document(firebaseAuth.getCurrentUser().getEmail())
+                .set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
                 Log.i("Firestore","Usuario nuevo en firestore");
                 firebaseAuth.signOut();
                 Intent intent = new Intent(EmpresaRegistroActivity.this,EmpresaLoginActivity.class);
@@ -157,7 +173,7 @@ public class EmpresaRegistroActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i("Firestore", "Error al añadir el usuario en firestore", e);
+
             }
         });
     }
