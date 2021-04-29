@@ -1,5 +1,7 @@
 package com.example.tutorialfirebase.Modelos.ConfiguraciónDB;
 
+import android.os.StrictMode;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 public class BaseDB {
     public static Connection conectarConBaseDeDatos() {
         try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
             Connection conexión = DriverManager.getConnection(ConfiguraciónDB.URLMYSQL, ConfiguraciónDB.USUARIODB, ConfiguraciónDB.CLAVEDB);
             return conexión;
         } catch (SQLException e) {

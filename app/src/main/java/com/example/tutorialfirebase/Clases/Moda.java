@@ -58,7 +58,7 @@ public class Moda extends Producto{
 
     @Override
     public String toString() {
-        return "Moda{" +
+        return super.toString() + "Moda{" +
                 "talla='" + talla + '\'' +
                 ", color='" + color + '\'' +
                 ", material='" + material + '\'' +
