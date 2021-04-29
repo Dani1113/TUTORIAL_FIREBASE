@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+
+
+
 import com.example.tutorialfirebase.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,6 +37,7 @@ public class EmpresaViewHolder extends RecyclerView.ViewHolder {
         img_empresa = (CircleImageView) itemView.findViewById(R.id.img_empresa);
         this.lcAdapter = mAdapter;
     }
+
 
 }
 

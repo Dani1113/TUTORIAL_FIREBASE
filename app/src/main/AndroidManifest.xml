@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TutorialFirebase">
         <activity android:name=".EmpresaRegistroActivity"></activity>
+        <activity android:name=".MostrarDetalleEmpresaActivity"></activity>
         <activity android:name=".EmpresaLoginActivity" />
         <activity
             android:name=".HomeActivity"

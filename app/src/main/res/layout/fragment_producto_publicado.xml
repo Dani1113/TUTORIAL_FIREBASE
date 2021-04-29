@@ -7,8 +7,17 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/texto_empresas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        />
+
+    <Button
+        android:id="@+id/btn_Atras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/atras"
+        android:layout_marginTop="600dp"
         />
 
 </FrameLayout>

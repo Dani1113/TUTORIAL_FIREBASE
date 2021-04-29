@@ -14,14 +14,14 @@
             android:id="@+id/action_ir_a_empresas"
             app:destination="@id/fragment_empresas" />
         <action
-            android:id="@+id/action_ir_a_productos_empresa"
-            app:destination="@id/detalle_productos_empresa" />
+            android:id="@+id/action_ir_a_productos_publicados"
+            app:destination="@id/fragment_producto_publicado" />
     </fragment>
     <fragment
-        android:id="@+id/detalle_productos_empresa"
-        android:name="com.example.tutorialfirebase.detalle_productos_empresa"
-        android:label="fragment_detalle_productos_empresa"
-        tools:layout="@layout/fragment_detalle_productos_empresa" >
+        android:id="@+id/fragment_producto_publicado"
+        android:name="com.example.tutorialfirebase.fragment_producto_publicado"
+        android:label="fragment_producto_publicado"
+        tools:layout="@layout/fragment_producto_publicado" >
         <action
             android:id="@+id/action_ir_a_empresas"
             app:destination="@id/fragment_empresas" />
