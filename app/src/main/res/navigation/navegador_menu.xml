@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegador_menu"
+    app:startDestination="@id/fragment_empresas">
+
+    <fragment
+        android:id="@+id/fragment_empresas"
+        android:name="com.example.tutorialfirebase.fragment_empresas"
+        android:label="fragment_empresas"
+        tools:layout="@layout/fragment_empresas" >
+        <action
+            android:id="@+id/action_ir_a_empresas"
+            app:destination="@id/fragment_empresas" />
+        <action
+            android:id="@+id/action_ir_a_productos_empresa"
+            app:destination="@id/detalle_productos_empresa" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalle_productos_empresa"
+        android:name="com.example.tutorialfirebase.detalle_productos_empresa"
+        android:label="fragment_detalle_productos_empresa"
+        tools:layout="@layout/fragment_detalle_productos_empresa" >
+        <action
+            android:id="@+id/action_ir_a_empresas"
+            app:destination="@id/fragment_empresas" />
+    </fragment>
+</navigation>

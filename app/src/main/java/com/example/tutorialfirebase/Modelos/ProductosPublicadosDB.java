@@ -4,33 +4,38 @@ import android.util.Log;
 
 import com.example.tutorialfirebase.Clases.Empresa;
 import com.example.tutorialfirebase.Clases.Moda;
-import com.example.tutorialfirebase.Clases.Producto;
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
+import com.example.tutorialfirebase.Tareas.TareasProductoPublicado.TareaObtenerProductoPublicadoPorEmpresa;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class ProductosPublicadosDB {
-    private static Empresa empresa;
-
-    public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página){
+    public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página) {
         Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if(conexión == null) {
+        if (conexión == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");
             return null;
         }
         ArrayList<ProductosPublicados> productosPublicadosDevueltos = new ArrayList<ProductosPublicados>();
         try {
+            Empresa empresa = new Empresa("", "", "");
             Statement sentencia = conexión.createStatement();
             String ordenSQL = "SELECT * FROM empresas";
             ResultSet resultado = sentencia.executeQuery(ordenSQL);
-            while (resultado.next()){
+            int numFilas = 0;
+            while (resultado.next()) {
+                numFilas++;
                 String cod_empr = resultado.getString("cod_empr");
                 String clave_empr = resultado.getString("clave_empr");
                 String datos_empr = resultado.getString("datos_empr");
@@ -38,13 +43,95 @@ public class ProductosPublicadosDB {
             }
             resultado.close();
             sentencia.close();
+            if (numFilas == 0) {
+                return null;
+            }
 
             Statement sentencia2 = conexión.createStatement();
             int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
             String ordenSQL2 = "SELECT p.cod_producto, p.cod_QR, p.marca, p.modelo, p.descripcion, p.idfoto, m.talla, m.color, m.material, m.sexo, m.categoria_moda, pp.idproductoempresa, pp.cantidad, pp.precioventa, pp.habilitado, pp.archivado FROM productos p INNER JOIN moda m INNER JOIN productospublicados pp ON (m.cod_producto = p.cod_producto AND p.cod_producto = pp.cod_producto) WHERE pp.habilitado = 1 AND pp.archivado = 0 LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
             ResultSet resultado2 = sentencia2.executeQuery(ordenSQL2);
-            while(resultado2.next()) {
+            while (resultado2.next()) {
                 String cod_producto = resultado2.getString("cod_producto");
+                Log.i("sql", "prueba cod");
+                String cod_QR = resultado2.getString("cod_QR");
+                String marca = resultado2.getString("marca");
+                String modelo = resultado2.getString("modelo");
+                String descripcion = resultado2.getString("descripcion");
+                int id_foto = resultado2.getInt("idfoto");
+                String talla = resultado2.getString("talla");
+                String color = resultado2.getString("color");
+                String material = resultado2.getString("material");
+                String sexo = resultado2.getString("sexo");
+                String categoria_moda = resultado2.getString("categoria_moda");
+                Moda moda = new Moda(cod_producto, cod_QR, marca, modelo, descripcion, id_foto, talla, color, material, sexo, categoria_moda);
+
+                int idproductoempresa = resultado2.getInt("idproductoempresa");
+                int cantidad = resultado2.getInt("cantidad");
+                double precioventa = resultado2.getDouble("precioventa");
+                int habilitadoI = resultado2.getInt("habilitado");
+                int archivadoI = resultado2.getInt("archivado");
+                boolean habilitado;
+                if (habilitadoI == 1) {
+                    habilitado = true;
+                } else {
+                    habilitado = false;
+                }
+                boolean archivado;
+                if (archivadoI == 1) {
+                    archivado = true;
+                } else {
+                    archivado = false;
+                }
+
+                ProductosPublicados productoPublicado = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, moda, empresa);
+                productosPublicadosDevueltos.add(productoPublicado);
+            }
+            resultado2.close();
+            sentencia2.close();
+
+            conexión.close();
+
+            return productosPublicadosDevueltos;
+        } catch (SQLException e) {
+            Log.i("SQL", "Error al mostrar los productos publicados de la base de datos");
+            return null;
+        }
+    }
+
+    public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int página, String cod_empresa) {
+        Connection conexión = BaseDB.conectarConBaseDeDatos();
+        if (conexión == null) {
+            Log.i("SQL", "Error al establecer la conexión con la base de datos");
+            return null;
+        }
+        ArrayList<ProductosPublicados> productosPublicadosDevueltos = new ArrayList<ProductosPublicados>();
+        try {
+            Empresa empresa = new Empresa("", "", "");
+            Statement sentencia = conexión.createStatement();
+            String ordenSQL = "SELECT * FROM empresas";
+            ResultSet resultado = sentencia.executeQuery(ordenSQL);
+            int numFilas = 0;
+            while (resultado.next()) {
+                numFilas++;
+                String cod_empr = resultado.getString("cod_empr");
+                String clave_empr = resultado.getString("clave_empr");
+                String datos_empr = resultado.getString("datos_empr");
+                empresa = new Empresa(cod_empr, clave_empr, datos_empr);
+            }
+            resultado.close();
+            sentencia.close();
+            if (numFilas == 0) {
+                return null;
+            }
+
+            Statement sentencia2 = conexión.createStatement();
+            int desplazamiento = página * ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            String ordenSQL2 = "SELECT p.cod_producto, p.cod_QR, p.marca, p.modelo, p.descripcion, p.idfoto, m.talla, m.color, m.material, m.sexo, m.categoria_moda, pp.idproductoempresa, pp.cantidad, pp.precioventa, pp.habilitado, pp.archivado FROM productos p INNER JOIN moda m INNER JOIN productospublicados pp INNER JOIN empresas e ON (m.cod_producto = p.cod_producto AND p.cod_producto = pp.cod_producto AND pp.cod_empresa = e.empr) WHERE pp.habilitado = 1 AND pp.archivado = 0 AND e.cod_empr = " + cod_empresa + " LIMIT " + desplazamiento + ", " + ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA;
+            ResultSet resultado2 = sentencia2.executeQuery(ordenSQL2);
+            while (resultado2.next()) {
+                String cod_producto = resultado2.getString("cod_producto");
+                Log.i("sql", "prueba cod");
                 String cod_QR = resultado2.getString("cod_QR");
                 String marca = resultado2.getString("marca");
                 String modelo = resultado2.getString("modelo");
@@ -60,8 +147,21 @@ public class ProductosPublicadosDB {
                 int idproductoempresa = resultado2.getInt("idproductoempresa");
                 int cantidad = resultado2.getInt("cantidad");
                 double precioventa = resultado2.getDouble("precioventa");
-                boolean habilitado = resultado2.getBoolean("habilitado");
-                boolean archivado = resultado2.getBoolean("archivado");
+                int habilitadoI = resultado2.getInt("habilitado");
+                int archivadoI = resultado2.getInt("archivado");
+                boolean habilitado;
+                if (habilitadoI == 1) {
+                    habilitado = true;
+                } else {
+                    habilitado = false;
+                }
+                boolean archivado;
+                if (archivadoI == 1) {
+                    archivado = true;
+                } else {
+                    archivado = false;
+                }
+
                 ProductosPublicados productoPublicado = new ProductosPublicados(idproductoempresa, cantidad, precioventa, habilitado, archivado, moda, empresa);
                 productosPublicadosDevueltos.add(productoPublicado);
             }
@@ -115,28 +215,53 @@ public class ProductosPublicadosDB {
     */
 
     public static int obtenerCantidadProductosPublicados() {
-        Connection conexión = BaseDB.conectarConBaseDeDatos();
-        if (conexión == null) {
+        Connection conexion = BaseDB.conectarConBaseDeDatos();
+        if (conexion == null) {
             Log.i("SQL", "Error al establecer la conexión con la base de datos");
             return 0;
         }
         int cantidadProductosPublicados = 0;
         try {
-            Statement sentencia = conexión.createStatement();
+            assert conexion != null;
+            Statement sentencia = conexion.createStatement();
             String ordenSQL = "SELECT count(*) as cantidad FROM productospublicados";
-            ResultSet resultado  = sentencia.executeQuery(ordenSQL);
+            ResultSet resultado = sentencia.executeQuery(ordenSQL);
             while (resultado.next()) {
                 cantidadProductosPublicados = resultado.getInt("cantidad");
             }
             resultado.close();
             sentencia.close();
 
-            conexión.close();
+            conexion.close();
 
             return cantidadProductosPublicados;
         } catch (SQLException e) {
             Log.i("SQL", "Error al devolver el número de productos publicados de la base de datos");
             return 0;
         }
+    }
+
+
+    public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int pagina, String cod_empr) {
+        ArrayList<ProductosPublicados> productosPublicadosDevuelto = null;
+        FutureTask tarea = new FutureTask(new TareaObtenerProductoPublicadoPorEmpresa(pagina, cod_empr));
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        es.submit(tarea);
+        try {
+            productosPublicadosDevuelto = (ArrayList<ProductosPublicados>) tarea.get();
+            es.shutdown();
+            try {
+                if (!es.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                    es.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                es.shutdownNow();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return productosPublicadosDevuelto;
     }
 }

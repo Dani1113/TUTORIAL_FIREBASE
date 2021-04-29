@@ -99,5 +99,7 @@ public class InfoEmpresa implements Serializable {
                 ", cod_empresa='" + cod_empresa + '\'' +
                 '}';
     }
+
 }
+
 
