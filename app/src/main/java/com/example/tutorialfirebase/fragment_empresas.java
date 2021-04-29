@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.tutorialfirebase.Clases.*;
 import com.example.tutorialfirebase.Controladores.*;
-import com.example.tutorialfirebase.Utilidades.PaginationListener;
+import com.example.tutorialfirebase.utilidades.PaginationListener;
 
 import java.util.ArrayList;
 
