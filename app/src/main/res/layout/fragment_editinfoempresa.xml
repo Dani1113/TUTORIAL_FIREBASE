@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.editInfoEmpresa.editinfoempresaFragment"
+    android:background="@color/fondo"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:id="@+id/txt_titulo_editInfoE"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:gravity="center"
+        android:paddingTop="40dp"
+        android:paddingBottom="30dp"
+        android:text="@string/txt_titulo_editInfoE"
+        android:textColor="@color/amarillo"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_logo_editInfoE"
+        android:layout_width="match_parent"
+        android:layout_height="158dp"
+        android:src="@color/purple_200"
+        app:border_overlay="true" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:id="@+id/edt_nombre_editInfoE"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:autofillHints=""
+        android:background="@drawable/style_edt"
+        android:hint="@string/edt_nombre_editInfoE"
+        android:inputType="text"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/purple_200" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/edt_localizacion_editInfoE"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/style_edt"
+        android:ems="10"
+        android:hint="@string/edt_localizacion_editInfoE"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/purple_200" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/edt_CIF_editInfoE"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:autofillHints=""
+        android:background="@drawable/style_edt"
+        android:ems="10"
+        android:hint="@string/edt_CIF_editInfoE"
+        android:inputType="textPersonName"
+        android:textColor="@color/amarillo"
+        android:textColorHint="@color/purple_200" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/btn_editar_editInfoE"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/btn_editar_editInfoE"
+        android:textColor="@color/fondo"
+        android:textStyle="bold"
+        app:backgroundTint="@color/amarillo"
+        app:cornerRadius="30dp" />
+
+</LinearLayout>

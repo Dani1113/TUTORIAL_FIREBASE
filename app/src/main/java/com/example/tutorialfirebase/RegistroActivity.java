@@ -119,8 +119,9 @@ public class RegistroActivity extends AppCompatActivity {
                 if(!task.isSuccessful()){
                     Toast.makeText(RegistroActivity.this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(RegistroActivity.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
                     addToFirestore(tipoUsuario);
+                    Toast.makeText(RegistroActivity.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -128,7 +129,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     private void addToFirestore(String tipoUsuario) {
         String nombre = String.valueOf(edtRNombre.getText());
-
         Map<String, Object> usuario = new HashMap<>();
         usuario.put("Nombre", nombre);
         usuario.put("Email", firebaseAuth.getCurrentUser().getEmail());
@@ -137,10 +137,25 @@ public class RegistroActivity extends AppCompatActivity {
         db.collection(tipoUsuario).document(firebaseAuth.getCurrentUser().getUid()).set(usuario).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Log.i("", "Nuevo usuario en firestore");
-                firebaseAuth.signOut();
-                Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-                startActivity(intent);
+
+                Map<String, Object> data = new HashMap<>();
+                db.collection("businessdata")
+                        .document(firebaseAuth.getCurrentUser().getEmail())
+                        .set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.i("", "Nuevo usuario en firestore");
+                        firebaseAuth.signOut();
+                        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -148,5 +163,9 @@ public class RegistroActivity extends AppCompatActivity {
                 Log.i("", "Error al añadir el usuario en firestore", e);
             }
         });
+    }
+
+    private void createDocument(){
+
     }
 }
