@@ -8,10 +8,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_empresas"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="571dp"
         android:layout_marginStart="@dimen/margen1"
         android:layout_marginLeft="@dimen/margen1"
-        android:layout_marginTop="60sp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="@dimen/margen1"
         android:layout_marginRight="@dimen/margen1" />
 

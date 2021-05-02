@@ -1,20 +1,30 @@
 package com.example.tutorialfirebase;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.tutorialfirebase.Clases.Empresa;
+import com.example.tutorialfirebase.Clases.ConfiguracionesGenerales;
 import com.example.tutorialfirebase.Clases.EmpresaViewHolder;
+import com.example.tutorialfirebase.Clases.InfoEmpresa;
+import com.example.tutorialfirebase.Clases.ListaProductosPublicadosAdapter;
+import com.example.tutorialfirebase.Clases.ProductosPublicados;
+import com.example.tutorialfirebase.Modelos.ProductosPublicadosDB;
+import com.example.tutorialfirebase.Utilidades.PaginationListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,20 +33,22 @@ import com.example.tutorialfirebase.Clases.EmpresaViewHolder;
  */
 public class fragment_producto_publicado extends Fragment {
 
-    TextView txt_detalles_productos_empresa = null;
-    Button btn_atras ;
+    private Button btAtras = null;
+    private RecyclerView rvProductosPublicados;
+    private ArrayList<ProductosPublicados> productosPublicados;
+    private ListaProductosPublicadosAdapter listaProductosPublicadosAdapter = null;
+    private int páginaActual;
+    private int totalRegistros;
+    private int totalPáginas;
+    private int numColumnasLandscape;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View vista=  inflater.inflate(R.layout.fragment_producto_publicado, container, false);
-        Empresa e1 = (Empresa)getArguments().getSerializable(EmpresaViewHolder.EXTRA_OBJETO_EMPRESA);
-        txt_detalles_productos_empresa = (TextView)vista.findViewById(R.id.texto_empresas);
-        btn_atras = (Button) vista.findViewById(R.id.btn_Atras);
-        txt_detalles_productos_empresa.setText(e1.getCod_empresa());
 
-        btn_atras.setOnClickListener(new View.OnClickListener() {
+        //BOTÓN IR ATRÁS
+        btAtras = (Button) vista.findViewById(R.id.btn_Atras);
+        btAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = NavHostFragment.findNavController(fragment_producto_publicado.this);
@@ -47,10 +59,75 @@ public class fragment_producto_publicado extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                // Handle the back button event
+
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+        //RECYCLER VIEW CON LOS PRODUCTOS
+        páginaActual = 0;
+        numColumnasLandscape = 2;
+
+        InfoEmpresa infoEmpresa = (InfoEmpresa)getArguments().getSerializable(EmpresaViewHolder.EXTRA_OBJETO_EMPRESA);
+        String codEmpresa = infoEmpresa.getCod_empresa();
+        productosPublicados = ProductosPublicadosDB.obtenerProductosPublicadosPorEmpresa(páginaActual, codEmpresa);
+
+        páginaActual++;
+        if(productosPublicados != null) {
+            Log.i("SQL", "Página actual -> " + String.valueOf(páginaActual));
+            Log.i("SQL", "Productos publicados leídos -> " + String.valueOf(this.productosPublicados.size()));
+            rvProductosPublicados = vista.findViewById(R.id.rvProductosPublicados);
+            listaProductosPublicadosAdapter = new ListaProductosPublicadosAdapter(getActivity(), productosPublicados);
+            rvProductosPublicados.setAdapter(listaProductosPublicadosAdapter);
+            int orientation = 1;
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                rvProductosPublicados.setLayoutManager(new LinearLayoutManager(getActivity()));
+            } else {
+                rvProductosPublicados.setLayoutManager(new GridLayoutManager(getActivity(), ConfiguracionesGenerales.LANDSCAPE_NUM_COLUMNAS));
+            }
+
+            //PAGINACIÓN
+            rvProductosPublicados.addOnScrollListener(new PaginationListener((LinearLayoutManager) rvProductosPublicados.getLayoutManager()) {
+                private int productosPublicadosLeídos = 0;
+                @Override
+                protected void loadMoreItems() {
+                    int totalRegistrosLeídos = rvProductosPublicados.getLayoutManager().getItemCount();
+                    if (totalRegistrosLeídos < totalRegistros) {
+                        ArrayList<ProductosPublicados> nuevosProductosPublicados = ProductosPublicadosDB.obtenerProductosPublicadosPorEmpresa(páginaActual, codEmpresa);
+                        productosPublicadosLeídos = nuevosProductosPublicados.size();
+                        páginaActual++;
+
+                        Boolean resultado = rvProductosPublicados.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ListaProductosPublicadosAdapter listaProductosPublicadosAdapter1 = (ListaProductosPublicadosAdapter) rvProductosPublicados.getAdapter();
+                                ArrayList<ProductosPublicados> productosPublicadosRv = listaProductosPublicadosAdapter1.getListaProductosPublicados();
+                                productosPublicadosRv.addAll(nuevosProductosPublicados);
+                                rvProductosPublicados.getAdapter().notifyDataSetChanged();
+                            }});
+                        Log.i("SQL", "Siguiente página -> " + String.valueOf(páginaActual));
+                        Log.i("SQL", "Total registros -> " + String.valueOf(totalRegistros));
+                        Log.i("SQL", "Total registros leídos -> " + String.valueOf(totalRegistrosLeídos));
+                        Log.i("SQL", "Productos publicados leídos -> " + String.valueOf(this.productosPublicadosLeídos));
+                    }
+                    else{
+                        productosPublicadosLeídos = 0;
+                    }
+                }
+                @Override
+                public boolean isLastPage() {
+                    if(páginaActual > totalPáginas - 1) {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+            });
+        }
+        else{
+            Log.i("SQL", "Error en el modelo");
+        }
         return vista;
     }
 }

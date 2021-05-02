@@ -5,19 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".fragment_producto_publicado">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/texto_empresas"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductosPublicados"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="570dp"
+        android:layout_marginStart="@dimen/margen1"
+        android:layout_marginLeft="@dimen/margen1"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="@dimen/margen1"
+        android:layout_marginRight="@dimen/margen1" />
 
     <Button
         android:id="@+id/btn_Atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/atras"
-        android:layout_marginTop="600dp"
-        />
+        android:layout_marginTop="650dp"
+        android:layout_marginLeft="@dimen/margen1"
+        android:text="@string/atras" />
 
 </FrameLayout>

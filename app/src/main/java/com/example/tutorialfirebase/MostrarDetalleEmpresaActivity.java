@@ -7,10 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import  com.example.tutorialfirebase.Utilidades.ImagenesBlobBitmap;
 
-
-import com.example.tutorialfirebase.Clases.*;
+import com.example.tutorialfirebase.Clases.Empresa;
 
 import static com.example.tutorialfirebase.Clases.EmpresaViewHolder.EXTRA_OBJETO_EMPRESA;
 

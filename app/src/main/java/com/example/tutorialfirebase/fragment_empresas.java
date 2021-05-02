@@ -1,25 +1,21 @@
 package com.example.tutorialfirebase;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.registration.projectClass.RecyclerItemClickListener;
-import com.example.tutorialfirebase.Clases.*;
-import com.example.tutorialfirebase.Controladores.*;
-import com.example.tutorialfirebase.utilidades.PaginationListener;
+import com.example.tutorialfirebase.Clases.InfoEmpresa;
+import com.example.tutorialfirebase.Clases.ListaEmpresasAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import static com.example.tutorialfirebase.Clases.EmpresaViewHolder.EXTRA_OBJETO_EMPRESA;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link fragment_empresas #newInstance} factory method to
@@ -39,7 +37,7 @@ public class fragment_empresas extends Fragment {
     private static final int PETICION1 = 1;
     private RecyclerView mRecyclerView;
     private ListaEmpresasAdapter mAdapter;
-    private ArrayList<Empresa> empresas;
+    private ArrayList<InfoEmpresa> infoEmpresas;
     private int pagina_actual;
     private int total_registros;
     private int total_paginas;
@@ -53,26 +51,15 @@ public class fragment_empresas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista =  inflater.inflate(R.layout.fragment_empresas, container, false);
-        Log.i("sql", String.valueOf(total_registros));
-        //total_registros = EmpresaController.obtenerCantidadEmpresas();
-        //Log.i("sql", String.valueOf(total_registros));
-        //Log.i("sql", "total registros -> " + String.valueOf(total_registros));
-
-        //total_paginas = (total_registros / ConfiguracionesGenerales.ELEMENTOS_POR_PAGINA) +  1;
-        //Log.i("sql", "total paginas -> " + String.valueOf(total_paginas));
 
         /*---COGER ELEMENTOS DE LA BASE DE DATOS DE FIREBASE---*/
         db = FirebaseFirestore.getInstance();
-
-        ArrayList<InfoEmpresa> infoEmpresas = new ArrayList<>();
-        mRecyclerView = vista.findViewById(R.id.rv_empresas);
-        mAdapter = new ListaEmpresasAdapter(getActivity(),infoEmpresas);
+        infoEmpresas = new ArrayList<InfoEmpresa>();
+        mRecyclerView = (RecyclerView) vista.findViewById(R.id.rv_empresas);
+        mAdapter = new ListaEmpresasAdapter(getActivity(), infoEmpresas);
         LinearLayoutManager l = new LinearLayoutManager(getActivity());
-
-        mRecyclerView.setLayoutManager(l);
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-
 
         db.collection("businessdata").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -82,7 +69,6 @@ public class fragment_empresas extends Fragment {
                     Log.i("illo","Tiene exito coger datos");
                     for (QueryDocumentSnapshot document : task.getResult()){
                         DocumentReference documentReference = db.collection("businessdata").document(document.getId()).collection("editinfoempresa").document("infoEmpresa");
-
                         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -103,15 +89,13 @@ public class fragment_empresas extends Fragment {
             }
         });
 
-
-
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 infoEmpresa = mAdapter.getEmpresa(position);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("infoEmpresa",infoEmpresa);
-                Navigation.findNavController(vista).navigate(R.id.action_ir_a_productos_empresa,bundle);
+                bundle.putSerializable(EXTRA_OBJETO_EMPRESA, infoEmpresa);
+                Navigation.findNavController(vista).navigate(R.id.action_ir_a_productos_publicados,bundle);
             }
 
             @Override
@@ -123,17 +107,6 @@ public class fragment_empresas extends Fragment {
         /*---FIN COGER ELEMENTOS FIREBASE---*/
 
 
-//        pagina_actual=0;
-//        num_columnas_landscape = 2;
-//        empresas = EmpresaController.obtenerEmpresas(pagina_actual);
-//
-//        pagina_actual++;
-//        if(empresas != null) {
-//            /*Log.i("sql", "pagina actual -> " + String.valueOf(pagina_actual));
-//            Log.i("sql", "empresas leidas -> " + String.valueOf(this.empresas.size()));
-//            mRecyclerView = vista.findViewById(R.id.rv_empresas);
-//            mAdapter = new ListaEmpresasAdapter(getActivity(), empresas);
-//            mRecyclerView.setAdapter(mAdapter);
 //            int orientation = 1;*/
 //            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 //                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

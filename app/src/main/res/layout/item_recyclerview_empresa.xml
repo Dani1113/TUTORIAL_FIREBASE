@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margen1">
+        android:layout_margin="@dimen/margen1" >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_empresa"
@@ -19,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="@dimen/padding1">
@@ -35,21 +34,25 @@
                 android:id="@+id/txt_rv_sector_empresa"
                 android:layout_width="@dimen/ancho1_item_reciclerview"
                 android:layout_height="wrap_content"
-                android:text="@string/clave_empresa" />
+                android:text="@string/clave_empresa"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txt_rv_resumen_empresa"
                 android:layout_width="@dimen/ancho1_item_reciclerview"
                 android:layout_height="wrap_content"
-                android:text="@string/datos_empresa" />
+                android:text="@string/datos_empresa"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txt_rv_direccion_empresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/direccion_empresa"
+                android:textSize="14sp" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
