@@ -13,15 +13,15 @@ public class Producto {
     private String marca;
     private String modelo;
     private String descripción;
-    private int id_foto;
+    private Blob imagen;
 
-    public Producto(String cod_producto, String cod_QR, String marca, String modelo, String descripción, int id_foto) {
+    public Producto(String cod_producto, String cod_QR, String marca, String modelo, String descripción, Blob imagen) {
         this.cod_producto = cod_producto;
         this.cod_QR = cod_QR;
         this.marca = marca;
         this.modelo = modelo;
         this.descripción = descripción;
-        this.id_foto = id_foto;
+        this.imagen = imagen;
     }
 
     public String getCod_producto() {
@@ -64,12 +64,12 @@ public class Producto {
         this.descripción = descripción;
     }
 
-    public int getId_foto() {
-        return id_foto;
+    public Blob getImagen() {
+        return imagen;
     }
 
-    public void setId_foto(int id_foto) {
-        this.id_foto = id_foto;
+    public void setImagen(Blob imagen) {
+        this.imagen = imagen;
     }
 
     @Override
@@ -94,7 +94,6 @@ public class Producto {
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", descripción='" + descripción + '\'' +
-                ", id_foto=" + id_foto +
                 '}';
     }
 }

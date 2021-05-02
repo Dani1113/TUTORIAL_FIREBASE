@@ -21,6 +21,7 @@ import com.example.tutorialfirebase.Clases.EmpresaViewHolder;
 import com.example.tutorialfirebase.Clases.InfoEmpresa;
 import com.example.tutorialfirebase.Clases.ListaProductosPublicadosAdapter;
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
+import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 import com.example.tutorialfirebase.Modelos.ProductosPublicadosDB;
 import com.example.tutorialfirebase.Utilidades.PaginationListener;
 
@@ -40,7 +41,6 @@ public class fragment_producto_publicado extends Fragment {
     private int páginaActual;
     private int totalRegistros;
     private int totalPáginas;
-    private int numColumnasLandscape;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,14 +65,18 @@ public class fragment_producto_publicado extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         //RECYCLER VIEW CON LOS PRODUCTOS
-        páginaActual = 0;
-        numColumnasLandscape = 2;
+        totalRegistros = ProductosPublicadosDB.obtenerCantidadProductosPublicados();
+        totalPáginas = (totalRegistros / ConfiguracionesGeneralesDB.ELEMENTOS_POR_PAGINA) + 1;
+
+        Log.i("SQL", "Total de registros -> " + String.valueOf(totalRegistros));
+        Log.i("SQL", "Total de páginas -> " + String.valueOf(totalPáginas));
 
         InfoEmpresa infoEmpresa = (InfoEmpresa)getArguments().getSerializable(EmpresaViewHolder.EXTRA_OBJETO_EMPRESA);
         String codEmpresa = infoEmpresa.getCod_empresa();
-        productosPublicados = ProductosPublicadosDB.obtenerProductosPublicadosPorEmpresa(páginaActual, codEmpresa);
 
-        páginaActual++;
+        páginaActual = 0;
+        productosPublicados = ProductosPublicadosDB.obtenerProductosPublicadosPorEmpresa(páginaActual, codEmpresa);
+        páginaActual = páginaActual + 1;
         if(productosPublicados != null) {
             Log.i("SQL", "Página actual -> " + String.valueOf(páginaActual));
             Log.i("SQL", "Productos publicados leídos -> " + String.valueOf(this.productosPublicados.size()));
@@ -89,6 +93,7 @@ public class fragment_producto_publicado extends Fragment {
             //PAGINACIÓN
             rvProductosPublicados.addOnScrollListener(new PaginationListener((LinearLayoutManager) rvProductosPublicados.getLayoutManager()) {
                 private int productosPublicadosLeídos = 0;
+
                 @Override
                 protected void loadMoreItems() {
                     int totalRegistrosLeídos = rvProductosPublicados.getLayoutManager().getItemCount();
@@ -108,7 +113,6 @@ public class fragment_producto_publicado extends Fragment {
                         Log.i("SQL", "Siguiente página -> " + String.valueOf(páginaActual));
                         Log.i("SQL", "Total registros -> " + String.valueOf(totalRegistros));
                         Log.i("SQL", "Total registros leídos -> " + String.valueOf(totalRegistrosLeídos));
-                        Log.i("SQL", "Productos publicados leídos -> " + String.valueOf(this.productosPublicadosLeídos));
                     }
                     else{
                         productosPublicadosLeídos = 0;

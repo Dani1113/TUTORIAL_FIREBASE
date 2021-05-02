@@ -1,4 +1,4 @@
-package com.example.tutorialfirebase.utilidades;
+package com.example.tutorialfirebase.Utilidades;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

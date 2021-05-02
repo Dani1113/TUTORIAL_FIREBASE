@@ -8,6 +8,7 @@ import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.BaseDB;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductosPublicadosDB {
+    //OBTENER TODOS LOS PRODUCTOS PUBLICADOS DE MOMENTO NO SE ESTÁ USANDO
+    /*
     public static ArrayList<ProductosPublicados> obtenerProductosPublicados(int página) {
         Connection conexión = BaseDB.conectarConBaseDeDatos();
         if (conexión == null) {
@@ -93,6 +96,7 @@ public class ProductosPublicadosDB {
             return null;
         }
     }
+    */
 
     public static ArrayList<ProductosPublicados> obtenerProductosPublicadosPorEmpresa(int página, String cod_empresa) {
         Connection conexión = BaseDB.conectarConBaseDeDatos();
@@ -127,6 +131,8 @@ public class ProductosPublicadosDB {
             sentenciaPreparada.setString(1, cod_empresa);
             ResultSet resultado2 = sentenciaPreparada.executeQuery();
             while (resultado2.next()) {
+                Moda moda = null;
+
                 String cod_producto = resultado2.getString("cod_producto");
                 Log.i("sql", "prueba cod");
                 String cod_QR = resultado2.getString("cod_QR");
@@ -139,7 +145,24 @@ public class ProductosPublicadosDB {
                 String material = resultado2.getString("material");
                 String sexo = resultado2.getString("sexo");
                 String categoria_moda = resultado2.getString("categoria_moda");
-                Moda moda = new Moda(cod_producto, cod_QR, marca, modelo, descripción, id_foto, talla, color, material, sexo, categoria_moda);
+
+                if (id_foto == 1){
+                    moda = new Moda(cod_producto, cod_QR, marca, modelo, descripción, null, talla, color, material, sexo, categoria_moda);
+                }else {
+                    Blob imagen = null;
+
+                    String ordenSQL3 = "SELECT foto FROM fotos_productos WHERE idfotos = ?";
+                    PreparedStatement sentenciaPreparada2 = conexión.prepareStatement(ordenSQL3);
+                    sentenciaPreparada2.setInt(1, id_foto);
+                    ResultSet resultado3 = sentenciaPreparada2.executeQuery();
+                    while (resultado3.next()) {
+                        imagen = resultado3.getBlob("foto");
+                    }
+                    moda = new Moda(cod_producto, cod_QR, marca, modelo, descripción, imagen, talla, color, material, sexo, categoria_moda);
+
+                    sentenciaPreparada2.close();
+                    resultado3.close();
+                }
 
                 int idproductoempresa = resultado2.getInt("idproductoempresa");
                 int cantidad = resultado2.getInt("cantidad");
@@ -163,6 +186,7 @@ public class ProductosPublicadosDB {
                 productosPublicadosDevueltos.add(productoPublicado);
             }
             resultado2.close();
+            sentenciaPreparada.close();
             sentencia2.close();
 
             conexión.close();

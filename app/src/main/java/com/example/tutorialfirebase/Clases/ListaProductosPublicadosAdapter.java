@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 import com.example.tutorialfirebase.R;
 
 import java.util.ArrayList;
+
+import static com.example.tutorialfirebase.Utilidades.ImagenesBlobBitmap.blob_to_bitmap;
 
 public class ListaProductosPublicadosAdapter extends RecyclerView.Adapter<ProductoPublicadoViewHolder> {
     private Context c;
@@ -56,12 +59,11 @@ public class ListaProductosPublicadosAdapter extends RecyclerView.Adapter<Produc
         holder.txtPrecioProductoPublicado.setText(String.valueOf("Precio : " + productoPublicadoActual.getPrecioventa() + " €"));
         holder.txtStockProductoPublicado.setText(String.valueOf("Cantidad : " + productoPublicadoActual.getCantidad()));
         holder.txtDescripciónProductoPublicado.setText(String.valueOf("Descripción : " + productoPublicadoActual.getP().getDescripción()));
-        /*
-        if(productoPublicadoActual.getIdFoto() != null){
-            holder.img_empresa.setImageBitmap(productoPublicadoActual.getIdFoto());
+        if(productoPublicadoActual.getP().getImagen() != null){
+            holder.imgProductoPublicado.setImageBitmap(blob_to_bitmap(productoPublicadoActual.getP().getImagen(), ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
         } else{
-            holder.img_empresa.setImageResource(R.drawable.empresa);
-        }*/
+            holder.imgProductoPublicado.setImageResource(R.drawable.producto);
+        }
     }
 
     @Override

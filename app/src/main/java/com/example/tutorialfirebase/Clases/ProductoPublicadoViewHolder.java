@@ -28,7 +28,7 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
 
     public ProductoPublicadoViewHolder(@NonNull View itemView, ListaProductosPublicadosAdapter listaProductosPublicadosAdapter) {
         super(itemView);
-        //imgProductoPublicado = (CircleImageView)  itemView.findViewById(R.id.img_producto_publicado);
+        imgProductoPublicado = (CircleImageView)  itemView.findViewById(R.id.imgProductoPublicado);
         txtMarcaProductoPublicado = (TextView) itemView.findViewById(R.id.txtMarcaProductoPublicado);
         txtModeloProductoPublicado = (TextView) itemView.findViewById(R.id.txtModeloProductoPublicado);
         txtPrecioProductoPublicado = (TextView) itemView.findViewById(R.id.txtPrecioProductoPublicado);
@@ -44,22 +44,15 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
         ProductosPublicados productosPublicados = this.listaProductosPublicadosAdapter.getListaProductosPublicados().get(posición);
         listaProductosPublicadosAdapter.notifyDataSetChanged();
 
-        // Bitmap foto_empresa_png = empresa.getIdFoto();
-        /* if(foto_empresa_png != null){
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            foto_empresa_png.compress(Bitmap.CompressFormat.PNG, 0, baos);
-            //foto_empresa_png.compress(Bitmap.CompressFormat.JPEG, 0, baos);
+        //Blob imagenProductoPublicado = productosPublicados.getP().getImagen();
+        //Producto producto = new Producto(productosPublicados.getP().getCod_producto(), productosPublicados.getP().getCod_QR(), productosPublicados.getP().getMarca(), productosPublicados.getP().getModelo(), productosPublicados.getP().getDescripción(), imagenProductoPublicado);
 
-            byte[] byteArrayfoto = baos.toByteArray();
-            intent.putExtra(EXTRA_IMAGEN_EMPRESA, byteArrayfoto);
-        }
-        */
-        ProductosPublicados producto_publicado_sin_imagen = new ProductosPublicados(productosPublicados.getIdproductoempresa(), productosPublicados.getCantidad(), productosPublicados.getPrecioventa(), productosPublicados.isHabilitado(), productosPublicados.isArchivado(), productosPublicados.getP(), productosPublicados.getE());
+        ProductosPublicados productoPublicado = new ProductosPublicados(productosPublicados.getIdproductoempresa(), productosPublicados.getCantidad(), productosPublicados.getPrecioventa(), productosPublicados.isHabilitado(), productosPublicados.isArchivado(), productosPublicados.getP(), productosPublicados.getE());
 
         NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity) listaProductosPublicadosAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.nav_host_contenedor_home);
         NavController navController = navHostFragment.getNavController();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_OBJETO_PRODUCTO_PUBLICADO, producto_publicado_sin_imagen);
+        bundle.putSerializable(EXTRA_OBJETO_PRODUCTO_PUBLICADO, productoPublicado);
         //navController.navigate(R.id.action_ir_a_productos_publicados, bundle);
     }
 }

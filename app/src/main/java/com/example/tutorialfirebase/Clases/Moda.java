@@ -1,5 +1,7 @@
 package com.example.tutorialfirebase.Clases;
 
+import java.sql.Blob;
+
 public class Moda extends Producto{
     private String talla;
     private String color;
@@ -7,8 +9,8 @@ public class Moda extends Producto{
     private String sexo;
     private String categoria_moda;
 
-    public Moda(String cod_producto, String cod_QR, String marca, String modelo, String descripción, int id_foto, String talla, String color, String material, String sexo, String categoria_moda) {
-        super(cod_producto, cod_QR, marca, modelo, descripción, id_foto);
+    public Moda(String cod_producto, String cod_QR, String marca, String modelo, String descripción, Blob imagen, String talla, String color, String material, String sexo, String categoria_moda) {
+        super(cod_producto, cod_QR, marca, modelo, descripción, imagen);
         this.talla = talla;
         this.color = color;
         this.material = material;
