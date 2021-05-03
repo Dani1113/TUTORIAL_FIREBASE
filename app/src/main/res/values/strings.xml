@@ -41,7 +41,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -55,11 +54,6 @@
     <string name="galer_a_empresas">GALERÍA EMPRESAS</string>
     <string name="slideshow_empresas">SLIDESHOW EMPRESAS</string>
     <string name="ajustes">Ajustes</string>
-
-
-
-
-
     <string name="editar_mi_informaci_n">EDITAR MI INFORMACIÓN</string>
     <string name="txt_titulo_editInfoE">EDITAR INFORMACIÓN</string>
     <string name="btn_editar_editInfoE">Editar información</string>
@@ -82,7 +76,13 @@
     <string name="img_empresa">img_empresa</string>
     <string name="img_producto_publicado">img_producto_publicado</string>
     <string name="aqui_van_los_productos_de_una_empresa">aqui van los productos de una empresa</string>
-    <string name="atras">atras</string>
+    <string name="atras">ATRÁS</string>
     <string name="modelo">modelo</string>
-
+    <string name="direccion_empresa">direccion_empresa</string>
+    <string name="producto">producto</string>
+    <string name="modelo2">Modelo</string>
+    <string name="marca2">Marca</string>
+    <string name="precio2">Precio</string>
+    <string name="cantidad2">Cantidad</string>
+    <string name="descripcion2">Descripción</string>
 </resources>

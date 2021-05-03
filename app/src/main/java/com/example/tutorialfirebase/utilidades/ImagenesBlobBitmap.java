@@ -1,4 +1,4 @@
-package com.example.tutorialfirebase.utilidades;
+package com.example.tutorialfirebase.Utilidades;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +7,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 public class ImagenesBlobBitmap {
+
     //método que convierte un blob a un Bitmap
     public static Bitmap blob_to_bitmap(Blob b, int width, int height){
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
