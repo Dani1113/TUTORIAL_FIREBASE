@@ -59,10 +59,11 @@ public class ListaProductosPublicadosAdapter extends RecyclerView.Adapter<Produc
         holder.txtPrecioProductoPublicado.setText(String.valueOf("Precio : " + productoPublicadoActual.getPrecioventa() + " €"));
         holder.txtStockProductoPublicado.setText(String.valueOf("Cantidad : " + productoPublicadoActual.getCantidad()));
         holder.txtDescripciónProductoPublicado.setText(String.valueOf("Descripción : " + productoPublicadoActual.getP().getDescripción()));
-        if(productoPublicadoActual.getP().getImagen() != null){
-            holder.imgProductoPublicado.setImageBitmap(blob_to_bitmap(productoPublicadoActual.getP().getImagen(), ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
-        } else{
+        if(productoPublicadoActual.getP().getImagen() == null){
             holder.imgProductoPublicado.setImageResource(R.drawable.producto);
+        } else{
+            holder.imgProductoPublicado.setImageBitmap(blob_to_bitmap(productoPublicadoActual.getP().getImagen(), ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
+
         }
     }
 
