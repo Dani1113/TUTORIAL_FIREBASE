@@ -55,10 +55,10 @@ public class ListaEmpresasAdapter extends RecyclerView.Adapter<EmpresaViewHolder
         * Resumen
         * Direccion
         */
-        holder.txt_rv_nombre_empresa.setText(String.valueOf("cod_empresa : " + empresaActual.getNombre()));
+        holder.txt_rv_nombre_empresa.setText(String.valueOf(empresaActual.getNombre()));
 
-        holder.txt_rv_sector_empresa.setText(String.valueOf("clave_empr : " + empresaActual.getSector()));
-        holder.txt_rv_resumen_empresa.setText(String.valueOf("datos_empr : " + empresaActual.getResumen()));
+        holder.txt_rv_sector_empresa.setText(String.valueOf(empresaActual.getSector()));
+        holder.txt_rv_resumen_empresa.setText(String.valueOf(empresaActual.getResumen()));
         holder.txt_rv_direccion_empresa.setText("Dirección: "+ empresaActual.getDireccion());
         if (listaInfoEmpresa.get(position).getLogoURL().isEmpty()){
             holder.img_empresa.setImageResource(R.mipmap.ic_launcher);

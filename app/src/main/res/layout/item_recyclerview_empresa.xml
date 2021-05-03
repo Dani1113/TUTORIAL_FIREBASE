@@ -12,13 +12,14 @@
             android:id="@+id/img_empresa"
             android:layout_width="100sp"
             android:layout_height="100sp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:contentDescription="@string/img_empresa"
             android:src="@drawable/empresa" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="@dimen/padding1">
@@ -28,7 +29,7 @@
                 android:layout_width="@dimen/ancho1_item_reciclerview"
                 android:layout_height="wrap_content"
                 android:text="@string/cod_empresa"
-                android:textSize="@dimen/tam_letra1" />
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/txt_rv_sector_empresa"
