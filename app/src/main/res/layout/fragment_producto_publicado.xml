@@ -19,8 +19,8 @@
         android:id="@+id/btn_Atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
         android:layout_marginLeft="@dimen/margen1"
+        android:layout_marginTop="650dp"
         android:text="@string/atras" />
 
 </FrameLayout>

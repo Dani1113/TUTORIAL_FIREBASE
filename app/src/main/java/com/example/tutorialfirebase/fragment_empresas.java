@@ -46,7 +46,6 @@ public class fragment_empresas extends Fragment {
     private FirebaseFirestore db;
     private InfoEmpresa infoEmpresa;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

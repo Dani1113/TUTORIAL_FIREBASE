@@ -33,7 +33,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class fragment_producto_publicado extends Fragment {
-
     private Button btAtras = null;
     private RecyclerView rvProductosPublicados;
     private ArrayList<ProductosPublicados> productosPublicados;
@@ -44,7 +43,7 @@ public class fragment_producto_publicado extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View vista=  inflater.inflate(R.layout.fragment_producto_publicado, container, false);
+        View vista = inflater.inflate(R.layout.fragment_producto_publicado, container, false);
 
         //BOTÓN IR ATRÁS
         btAtras = (Button) vista.findViewById(R.id.btn_Atras);

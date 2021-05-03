@@ -26,7 +26,6 @@ public class ProductosPublicados implements Serializable {
         this.e = e;
     }
 
-
     public int getIdproductoempresa() {
         return idproductoempresa;
     }

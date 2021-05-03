@@ -79,4 +79,10 @@
     <string name="atras">ATRÁS</string>
     <string name="modelo">modelo</string>
     <string name="direccion_empresa">direccion_empresa</string>
+    <string name="producto">producto</string>
+    <string name="modelo2">Modelo</string>
+    <string name="marca2">Marca</string>
+    <string name="precio2">Precio</string>
+    <string name="cantidad2">Cantidad</string>
+    <string name="descripcion2">Descripción</string>
 </resources>

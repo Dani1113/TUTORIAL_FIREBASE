@@ -47,8 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_contenedor_home);
-         NavController navController1 = navHostFragment.getNavController();
-        navController1.navigate(R.id.action_ir_a_empresas);
+        NavController navController = navHostFragment.getNavController();
+        navController.navigate(R.id.action_ir_a_empresas);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

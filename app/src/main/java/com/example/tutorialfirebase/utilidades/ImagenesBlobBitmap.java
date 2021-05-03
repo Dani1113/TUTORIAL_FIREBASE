@@ -7,6 +7,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 public class ImagenesBlobBitmap {
+
     //método que convierte un blob a un Bitmap
     public static Bitmap blob_to_bitmap(Blob b, int width, int height){
         Bitmap.Config config = Bitmap.Config.ARGB_8888;

@@ -15,7 +15,7 @@ import com.example.tutorialfirebase.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener  {
-    public static final String EXTRA_OBJETO_PRODUCTO_PUBLICADO= "com.example.tutorialfirebase.ProductosPublicados";
+    public static final String EXTRA_OBJETO_PRODUCTO_PUBLICADO = "com.example.tutorialfirebase.ProductosPublicados";
     //public static final String EXTRA_IMAGEN_PRODUCTO_PUBLICADO = "com.example.tutorialfirebase.ProductoPublicadoViewHolder.imagen_productoPublicado";
 
     public ListaProductosPublicadosAdapter listaProductosPublicadosAdapter;
@@ -53,6 +53,6 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
         NavController navController = navHostFragment.getNavController();
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_OBJETO_PRODUCTO_PUBLICADO, productoPublicado);
-        //navController.navigate(R.id.action_ir_a_productos_publicados, bundle);
+        navController.navigate(R.id.action_ir_a_detalle_producto_publicado, bundle);
     }
 }
