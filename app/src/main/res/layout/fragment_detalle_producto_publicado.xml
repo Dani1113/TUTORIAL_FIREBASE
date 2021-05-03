@@ -23,6 +23,8 @@
             android:layout_marginLeft="@dimen/margen1"
             android:text="@string/atras" />
 
+
+
         <ImageView
             android:id="@+id/imgDetalleProductoPublicado"
             android:layout_width="220dp"
@@ -131,6 +133,17 @@
             android:layout_marginRight="50dp"
             android:textColor="@color/amarillo"
             android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/btn_carrito_compra"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toStartOf="@+id/btCCerrarS"
+            android:contentDescription="@string/todo1"
+            android:scaleType="centerInside"
+            android:src="@drawable/carrito"
+            android:layout_marginTop="625dp"
+            android:layout_marginLeft="300dp"/>
 
     </androidx.cardview.widget.CardView>
 
