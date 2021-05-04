@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.editInfoEmpresa.editinfoempresaFragment"
-    android:background="@color/fondo"
-    android:orientation="vertical">
+    android:background="@color/blanco"
+    android:orientation="vertical"
+    tools:context=".ui.editInfoEmpresa.editinfoempresaFragment">
 
     <View
         android:id="@+id/divider5"
@@ -21,7 +21,7 @@
         android:paddingTop="40dp"
         android:paddingBottom="30dp"
         android:text="@string/txt_titulo_editInfoE"
-        android:textColor="@color/amarillo"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
         android:id="@+id/img_logo_editInfoE"
         android:layout_width="match_parent"
         android:layout_height="158dp"
-        android:src="@color/purple_200"
+        android:src="@color/fondo"
         app:border_overlay="true" />
 
     <View
@@ -46,8 +46,8 @@
         android:background="@drawable/style_edt"
         android:hint="@string/edt_nombre_editInfoE"
         android:inputType="text"
-        android:textColor="@color/amarillo"
-        android:textColorHint="@color/purple_200" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <View
         android:id="@+id/divider2"
@@ -64,8 +64,8 @@
         android:hint="@string/edt_localizacion_editInfoE"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:textColor="@color/amarillo"
-        android:textColorHint="@color/purple_200" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <View
         android:id="@+id/divider3"
@@ -82,8 +82,8 @@
         android:ems="10"
         android:hint="@string/edt_CIF_editInfoE"
         android:inputType="textPersonName"
-        android:textColor="@color/amarillo"
-        android:textColorHint="@color/purple_200" />
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <View
         android:id="@+id/divider4"
@@ -98,9 +98,9 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="@string/btn_editar_editInfoE"
-        android:textColor="@color/fondo"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        app:backgroundTint="@color/amarillo"
+        app:backgroundTint="@color/fondo"
         app:cornerRadius="30dp" />
 
 </LinearLayout>

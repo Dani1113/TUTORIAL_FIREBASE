@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -36,10 +37,12 @@ public class fragment_detalle_producto_publicado extends Fragment {
     private TextView txtMarcaDetalleProductoPublicado;
     private TextView txtModeloDetalleProductoPublicado;
     private TextView txtDescripciónDetalleProductoPublicado;
+    private TableLayout tabla;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_detalle_producto_publicado, container, false);
+
 
         //BOTÓN IR ATRÁS
         btAtras = (Button) vista.findViewById(R.id.btn_Atras);
@@ -94,11 +97,12 @@ public class fragment_detalle_producto_publicado extends Fragment {
             txtMarcaDetalleProductoPublicado.setText(String.valueOf(productoPublicado.getP().getMarca()));
             txtModeloDetalleProductoPublicado.setText(String.valueOf(productoPublicado.getP().getModelo()));
             String descripción = String.valueOf(productoPublicado.getP().getDescripción());
-            if (descripción.length() > 11){
+            txtDescripciónDetalleProductoPublicado.setText(descripción);
+            /*if (descripción.length() > 11){
                 txtDescripciónDetalleProductoPublicado.setText(descripción.substring(0, 10) + "...");
             }else {
-                txtDescripciónDetalleProductoPublicado.setText(descripción);
-            }
+
+            }*/
         }else {
             Log.i("ERROR", "El producto publicado no se ha recibido del fragment anterior correctamente");
         }
