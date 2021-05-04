@@ -7,16 +7,16 @@
         android:id="@+id/menuUsuarios">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/usuarios"/>
+            android:icon="@drawable/empresa"
+            android:title="@string/empresas"/>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/galer_a_usuarios"/>
+            android:icon="@drawable/producto"
+            android:title="GALERIA DEPRODUCTOS"/>
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/slideshow_usuarios"/>
+            android:icon="@drawable/carrito"
+            android:title="PEDIDOS"/>
     </group>
 
     <group android:checkableBehavior="single"

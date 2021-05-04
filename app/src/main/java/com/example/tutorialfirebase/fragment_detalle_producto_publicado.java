@@ -19,6 +19,8 @@ import com.example.tutorialfirebase.Clases.ProductoPublicadoViewHolder;
 import com.example.tutorialfirebase.Clases.ProductosPublicados;
 import com.example.tutorialfirebase.Modelos.ConfiguraciónDB.ConfiguracionesGeneralesDB;
 
+import java.sql.Blob;
+
 import static com.example.tutorialfirebase.Utilidades.ImagenesBlobBitmap.blob_to_bitmap;
 
 /**
@@ -70,9 +72,26 @@ public class fragment_detalle_producto_publicado extends Fragment {
         txtDescripciónDetalleProductoPublicado = (TextView) vista.findViewById(R.id.txtDescripciónDetalleProductoPublicado);
 
         ProductosPublicados productoPublicado = (ProductosPublicados) getArguments().getSerializable(ProductoPublicadoViewHolder.EXTRA_OBJETO_PRODUCTO_PUBLICADO);
-
+            Blob imagen= productoPublicado.getP().getImagen();
         if (productoPublicado != null){
-            imgDetalleProductoPublicado.setImageBitmap(blob_to_bitmap(productoPublicado.getP().getImagen(), ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
+//aqui
+            if(imagen == null){
+                imgDetalleProductoPublicado.setImageResource(R.drawable.producto);
+            } else{
+                imgDetalleProductoPublicado.setImageBitmap(blob_to_bitmap(imagen, ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
+
+            }
+            //imgDetalleProductoPublicado.setImageBitmap(blob_to_bitmap(productoPublicado.getP().getImagen(), ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
+
+  /*
+            Blob imagenProductoPublicado = productoPublicado.getP().getImagen();
+            if (imagenProductoPublicado != null){
+                imgDetalleProductoPublicado.setImageBitmap(blob_to_bitmap(imagenProductoPublicado, ConfiguracionesGeneralesDB.ANCHO_FOTO, ConfiguracionesGeneralesDB.ALTO_FOTO));
+            }else {
+                imgDetalleProductoPublicado.setImageResource(R.drawable.producto);
+            }
+            */
+
             txtCantidadDetalleProductoPublicado.setText(String.valueOf(productoPublicado.getCantidad()) + " unidades");
             txtPrecioDetalleProductoPublicado.setText(String.valueOf(productoPublicado.getPrecioventa() + "€"));
             txtMarcaDetalleProductoPublicado.setText(String.valueOf(productoPublicado.getP().getMarca()));
