@@ -53,6 +53,10 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
         NavController navController = navHostFragment.getNavController();
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_OBJETO_PRODUCTO_PUBLICADO, productoPublicado);
-        navController.navigate(R.id.action_ir_a_detalle_producto_publicado, bundle);
+        if(productosPublicados.getP() instanceof Moda) {
+            navController.navigate(R.id.action_ir_a_detalle_producto_publicado, bundle);
+        }//else if(productosPublicados.getP() instanceof Coche) {  ----------> Aquí se cargaría un fragment diferente por cada hijo que cuelgue de Producto
+            //navController.navigate(R.id.action_ir_a_detalle_producto_publicado_coche, bundle);
+        //}
     }
 }
