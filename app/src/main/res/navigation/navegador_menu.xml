@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/fragment_producto_publicado"
         android:name="com.example.tutorialfirebase.fragment_producto_publicado"
-        android:label="fragment_producto_publicado"
+        android:label="Lista de productos"
         tools:layout="@layout/fragment_producto_publicado" >
         <action
             android:id="@+id/action_ir_a_empresas"

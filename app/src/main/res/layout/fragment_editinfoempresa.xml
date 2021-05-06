@@ -29,8 +29,13 @@
         android:id="@+id/img_logo_editInfoE"
         android:layout_width="match_parent"
         android:layout_height="158dp"
+        android:maxWidth="100sp"
+        android:maxHeight="100sp"
         android:src="@color/fondo"
-        app:border_overlay="true" />
+        app:civ_border_overlay="true"
+        android:requestLegacyExternalStorage="true"
+        app:civ_border_width="1sp"
+         />
 
     <View
         android:id="@+id/divider"
@@ -80,7 +85,21 @@
         android:autofillHints=""
         android:background="@drawable/style_edt"
         android:ems="10"
-        android:hint="@string/edt_CIF_editInfoE"
+        android:hint="Resumen"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/edt_sector"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10sp"
+        android:autofillHints=""
+        android:background="@drawable/style_edt"
+        android:ems="10"
+        android:hint="Sector"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />

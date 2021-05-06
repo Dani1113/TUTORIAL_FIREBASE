@@ -6,29 +6,186 @@
     android:layout_height="match_parent"
 
     tools:context=".fragment_detalle_producto_publicado">
-    
-    <TextView
-        android:id="@+id/txtDescripciónDetalleProductoPublicado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="340dp"
-        android:gravity="center_horizontal"
-        android:paddingLeft="10dp"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
-    <Button
-        android:id="@+id/btn_Atras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margen1"
-        android:layout_marginTop="665dp"
-        android:background="@color/fondo"
-        android:backgroundTint="@color/fondo"
-        android:text="@string/atras"
-        android:textColor="@color/black"
-        app:cornerRadius="24dip" />
+
+        <TextView
+            android:id="@+id/txtDescripciónDetalleProductoPublicado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="340dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+
+        <ImageView
+            android:id="@+id/imgDetalleProductoPublicado"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="65dp"
+            android:contentDescription="@string/producto"
+            android:src="@drawable/producto" />
+
+
+        <ImageButton
+            android:id="@+id/btn_carrito_compra"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toStartOf="@+id/btCCerrarS"
+            android:contentDescription="@string/todo1"
+            android:scaleType="centerInside"
+            android:src="@drawable/carrito"
+            android:layout_marginTop="600dp"
+            android:layout_marginLeft="30dp"/>
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="400dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="@string/modelo2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtModeloDetalleProductoPublicado"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="@string/marca2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtMarcaDetalleProductoPublicado"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="@string/cantidad2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCantidadDetalleProductoPublicado"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="@string/precio2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPrecioDetalleProductoPublicado"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/fondo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="DETALLES DEL PRODUCTO"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+   <!--
+
+
+
 
     <ImageView
         android:id="@+id/imgDetalleProductoPublicado"
@@ -39,287 +196,29 @@
         android:contentDescription="@string/producto"
         android:src="@drawable/producto" />
 
-    <LinearLayout
-        android:layout_width="350dp"
+
+
+    <Button
+        android:id="@+id/btn_Atras"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="400dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/modelo2"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtModeloDetalleProductoPublicado"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/marca2"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtMarcaDetalleProductoPublicado"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/cantidad2"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtCantidadDetalleProductoPublicado"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/precio2"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtPrecioDetalleProductoPublicado"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/margen1"
+        android:layout_marginTop="65dp"
         android:background="@color/fondo"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="DETALLES DEL PRODUCTO"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:backgroundTint="@color/fondo"
+        android:text="AÑADIR AL CARRITO"
+        android:textColor="@color/black"
+        android:layout_gravity=""
+        app:cornerRadius="24dip" />
  
-
-<!--
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment_detalle_producto_publicado"
-
-    android:background="@color/fondo">
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
-
-        <Button
-            android:id="@+id/btn_Atras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="665dp"
-            android:layout_marginLeft="@dimen/margen1"
-            android:text="@string/atras" />
-
-
-
-        <ImageView
-            android:id="@+id/imgDetalleProductoPublicado"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:contentDescription="@string/producto"
-            android:src="@drawable/producto" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="@string/cantidad2"
-            android:textSize="24sp"
-            android:textColor="@color/amarillo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="375dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="@string/precio2"
-            android:textSize="24sp"
-            android:textColor="@color/amarillo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="450dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="@string/marca2"
-            android:textSize="24sp"
-            android:textColor="@color/amarillo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="525dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="@string/modelo2"
-            android:textSize="24sp"
-            android:textColor="@color/amarillo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="600dp"
-            android:layout_gravity="left"
-            android:layout_marginLeft="50dp"
-            android:text="@string/descripcion2"
-            android:textSize="24sp"
-            android:textColor="@color/amarillo" />
-
-        <TextView
-            android:id="@+id/txtCantidadDetalleProductoPublicado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="300dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/amarillo"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtPrecioDetalleProductoPublicado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="375dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/amarillo"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtMarcaDetalleProductoPublicado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="450dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/amarillo"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtModeloDetalleProductoPublicado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="525dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/amarillo"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtDescripciónDetalleProductoPublicado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="600dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/amarillo"
-            android:textSize="24sp" />
-
-        <ImageButton
-            android:id="@+id/btn_carrito_compra"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_toStartOf="@+id/btCCerrarS"
-            android:contentDescription="@string/todo1"
-            android:scaleType="centerInside"
-            android:src="@drawable/carrito"
-            android:layout_marginTop="625dp"
-            android:layout_marginLeft="300dp"/>
-
-    </androidx.cardview.widget.CardView>
 -->
+
+
+
+
+
+
+
 
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment$HomeFragment">
+    tools:context=".ui.home.HomeFragment">
 
 
     <fragment
@@ -15,9 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
-
-
-
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -37,3 +34,6 @@
         app:navGraph="@navigation/navegador_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

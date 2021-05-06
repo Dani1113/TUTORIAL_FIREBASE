@@ -51,9 +51,9 @@ public class RegistroActivity extends AppCompatActivity {
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser usuario = firebaseAuth.getCurrentUser();
             if(usuario != null){
-                //firebaseAuth.signOut();
-                //Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-                //startActivity(intent);
+                firebaseAuth.signOut();
+                Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         }};
 

@@ -94,7 +94,7 @@ public class fragment_empresas extends Fragment {
                 infoEmpresa = mAdapter.getEmpresa(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(EXTRA_OBJETO_EMPRESA, infoEmpresa);
-                Navigation.findNavController(vista).navigate(R.id.action_ir_a_productos_publicados,bundle);
+                Navigation.findNavController(view).navigate(R.id.nav_producto_publicado,bundle);
             }
 
             @Override

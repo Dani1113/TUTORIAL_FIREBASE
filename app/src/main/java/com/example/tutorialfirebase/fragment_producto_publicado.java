@@ -11,11 +11,13 @@ import android.widget.Button;
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.registration.projectClass.RecyclerItemClickListener;
 import com.example.tutorialfirebase.Clases.ConfiguracionesGenerales;
 import com.example.tutorialfirebase.Clases.EmpresaViewHolder;
 import com.example.tutorialfirebase.Clases.InfoEmpresa;
@@ -45,6 +47,7 @@ public class fragment_producto_publicado extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_producto_publicado, container, false);
 
+        /*
         //BOTÓN IR ATRÁS
         btAtras = (Button) vista.findViewById(R.id.btn_Atras);
         btAtras.setOnClickListener(new View.OnClickListener() {
@@ -55,13 +58,17 @@ public class fragment_producto_publicado extends Fragment {
             }
         });
 
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
+         */
 
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//
+//            }
+//        };
+
+
+        //requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         //RECYCLER VIEW CON LOS PRODUCTOS
         totalRegistros = ProductosPublicadosDB.obtenerCantidadProductosPublicados();
@@ -82,12 +89,27 @@ public class fragment_producto_publicado extends Fragment {
             rvProductosPublicados = vista.findViewById(R.id.rvProductosPublicados);
             listaProductosPublicadosAdapter = new ListaProductosPublicadosAdapter(getActivity(), productosPublicados);
             rvProductosPublicados.setAdapter(listaProductosPublicadosAdapter);
+
             int orientation = 1;
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 rvProductosPublicados.setLayoutManager(new LinearLayoutManager(getActivity()));
             } else {
                 rvProductosPublicados.setLayoutManager(new GridLayoutManager(getActivity(), ConfiguracionesGenerales.LANDSCAPE_NUM_COLUMNAS));
             }
+            rvProductosPublicados.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), rvProductosPublicados, new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ProductosPublicados pp = listaProductosPublicadosAdapter.getProductoPublicado(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("productopublicado",pp);
+                    Navigation.findNavController(vista).navigate(R.id.detalle_producto_publicado, bundle);
+                }
+
+                @Override
+                public void onLongItemClick(View view, int position) {
+
+                }
+            }));
 
             //PAGINACIÓN
             rvProductosPublicados.addOnScrollListener(new PaginationListener((LinearLayoutManager) rvProductosPublicados.getLayoutManager()) {

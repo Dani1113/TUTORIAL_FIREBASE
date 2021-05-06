@@ -44,24 +44,24 @@ public class fragment_detalle_producto_publicado extends Fragment {
         View vista = inflater.inflate(R.layout.fragment_detalle_producto_publicado, container, false);
 
 
-        //BOTÓN IR ATRÁS
-        btAtras = (Button) vista.findViewById(R.id.btn_Atras);
-
-        btAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(fragment_detalle_producto_publicado.this);
-                navController.popBackStack();
-            }
-        });
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+//        //BOTÓN IR ATRÁS
+//        btAtras = (Button) vista.findViewById(R.id.btn_Atras);
+//
+//        btAtras.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NavController navController = NavHostFragment.findNavController(fragment_detalle_producto_publicado.this);
+//                navController.popBackStack();
+//            }
+//        });
+//
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//
+//            }
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         //DETALLES PRODUCTO PUBLICADO
         imgDetalleProductoPublicado = (ImageView) vista.findViewById(R.id.imgDetalleProductoPublicado);
@@ -71,7 +71,7 @@ public class fragment_detalle_producto_publicado extends Fragment {
         txtModeloDetalleProductoPublicado = (TextView) vista.findViewById(R.id.txtModeloDetalleProductoPublicado);
         txtDescripciónDetalleProductoPublicado = (TextView) vista.findViewById(R.id.txtDescripciónDetalleProductoPublicado);
 
-        ProductosPublicados productoPublicado = (ProductosPublicados) getArguments().getSerializable(ProductoPublicadoViewHolder.EXTRA_OBJETO_PRODUCTO_PUBLICADO);
+        ProductosPublicados productoPublicado = (ProductosPublicados) getArguments().getSerializable("productopublicado");
             Blob imagen= productoPublicado.getP().getImagen();
         if (productoPublicado != null){
 //aqui

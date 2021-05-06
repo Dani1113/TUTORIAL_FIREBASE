@@ -2,6 +2,7 @@ package com.example.tutorialfirebase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tutorialfirebase.Clases.InfoEmpresa;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -35,6 +38,7 @@ public class EmpresaRegistroActivity extends AppCompatActivity {
     private EditText edtConfirmPass;
     private EditText edtDireccion;
     private EditText edtSector;
+    private InfoEmpresa infoEmpresa = new InfoEmpresa();
 
     private FirebaseFirestore db;
     @Override
@@ -146,6 +150,11 @@ public class EmpresaRegistroActivity extends AppCompatActivity {
         empresa.put("Email", email);
         empresa.put("Sector", sector);
 
+        infoEmpresa.setSector(sector);
+        infoEmpresa.setNombre(nombre);
+        infoEmpresa.setDireccion(direccion);
+        infoEmpresa.setNombre(nombre);
+
         db.collection("Empresas").document(firebaseAuth.getCurrentUser().getUid()).set(empresa).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -176,5 +185,24 @@ public class EmpresaRegistroActivity extends AppCompatActivity {
 
             }
         });
+
+
+        DocumentReference documentReference = db.collection("businessdata").document(firebaseAuth.getCurrentUser().getEmail());
+        documentReference.collection("editinfoempresa")
+                .document("infoEmpresa").set(infoEmpresa).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
     }
 }

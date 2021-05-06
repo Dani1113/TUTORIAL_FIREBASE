@@ -59,7 +59,7 @@ public class editinfoempresaFragment extends Fragment {
 
     private CircleImageView logoEmpresa;
     private EditText nombreEmpresa;
-    private EditText localizacionEmpresa;
+    private EditText localizacionEmpresa, sector;
     private EditText cifEmpresa;
     private Button btnEditar;
 
@@ -110,6 +110,7 @@ public class editinfoempresaFragment extends Fragment {
         localizacionEmpresa = view.findViewById(R.id.edt_localizacion_editInfoE);
         cifEmpresa = view.findViewById(R.id.edt_CIF_editInfoE);
         btnEditar = view.findViewById(R.id.btn_editar_editInfoE);
+        sector = view.findViewById(R.id.edt_sector);
 
         ObtenerDatos();
         logoEmpresa.setOnClickListener(new View.OnClickListener() {
@@ -127,9 +128,9 @@ public class editinfoempresaFragment extends Fragment {
             public void onClick(View v) {
                 infoEmpresa.setNombre(nombreEmpresa.getText().toString());
                 infoEmpresa.setDireccion(localizacionEmpresa.getText().toString());
-                infoEmpresa.setCif(cifEmpresa.getText().toString());
+                infoEmpresa.setResumen(cifEmpresa.getText().toString());
                 infoEmpresa.setCod_empresa(firebaseAuth.getCurrentUser().getEmail());
-
+                infoEmpresa.setSector(sector.getText().toString());
                 DocumentReference documentReference = db.collection("businessdata").document(firebaseAuth.getCurrentUser().getEmail());
                 documentReference.collection("editinfoempresa")
                         .document("infoEmpresa").set(infoEmpresa).addOnCompleteListener(new OnCompleteListener<Void>() {

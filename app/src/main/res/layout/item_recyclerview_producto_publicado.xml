@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margen1" >
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/imgProductoPublicado"
             android:layout_width="100sp"
             android:layout_height="match_parent"

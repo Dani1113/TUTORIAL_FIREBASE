@@ -67,6 +67,11 @@ public class ListaProductosPublicadosAdapter extends RecyclerView.Adapter<Produc
         }
     }
 
+    public ProductosPublicados getProductoPublicado(int position){
+        ProductosPublicados pp = listaProductosPublicados.get(position);
+        return pp;
+    }
+
     @Override
     public int getItemCount() {
         if (listaProductosPublicados != null) {
