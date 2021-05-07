@@ -2,6 +2,7 @@ package com.example.tutorialfirebase.Clases;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tutorialfirebase.R;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener  {
     public static final String EXTRA_OBJETO_PRODUCTO_PUBLICADO = "com.example.tutorialfirebase.ProductosPublicados";
     //public static final String EXTRA_IMAGEN_PRODUCTO_PUBLICADO = "com.example.tutorialfirebase.ProductoPublicadoViewHolder.imagen_productoPublicado";
 
     public ListaProductosPublicadosAdapter listaProductosPublicadosAdapter;
-    public CircleImageView imgProductoPublicado = null;
+    public ImageView imgProductoPublicado = null;
     public TextView txtMarcaProductoPublicado = null;
     public TextView txtModeloProductoPublicado = null;
     public TextView txtPrecioProductoPublicado = null;
@@ -28,7 +27,7 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
 
     public ProductoPublicadoViewHolder(@NonNull View itemView, ListaProductosPublicadosAdapter listaProductosPublicadosAdapter) {
         super(itemView);
-        imgProductoPublicado = (CircleImageView)  itemView.findViewById(R.id.imgProductoPublicado);
+        imgProductoPublicado = (ImageView)  itemView.findViewById(R.id.imgProductoPublicado);
         txtMarcaProductoPublicado = (TextView) itemView.findViewById(R.id.txtMarcaProductoPublicado);
         txtModeloProductoPublicado = (TextView) itemView.findViewById(R.id.txtModeloProductoPublicado);
         txtPrecioProductoPublicado = (TextView) itemView.findViewById(R.id.txtPrecioProductoPublicado);
@@ -49,7 +48,7 @@ public class ProductoPublicadoViewHolder  extends RecyclerView.ViewHolder implem
 
         ProductosPublicados productoPublicado = new ProductosPublicados(productosPublicados.getIdproductoempresa(), productosPublicados.getCantidad(), productosPublicados.getPrecioventa(), productosPublicados.isHabilitado(), productosPublicados.isArchivado(), productosPublicados.getP(), productosPublicados.getE());
 
-        NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity) listaProductosPublicadosAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.nav_host_contenedor_home);
+        NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity) listaProductosPublicadosAdapter.getC()).getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_OBJETO_PRODUCTO_PUBLICADO, productoPublicado);
